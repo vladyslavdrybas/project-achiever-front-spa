@@ -5,6 +5,7 @@ import {ApiAuthProvider} from "@/security/auth";
 import AppLayout from "@/AppLayout";
 import HomePage from "@/pages/HomePage";
 import SignInPage from "@/pages/auth/SignInPage";
+import SignUpPage from "@/pages/auth/SignUpPage";
 
 const AppRouter = createBrowserRouter([
     {
@@ -31,8 +32,6 @@ const AppRouter = createBrowserRouter([
             {
                 path: "signin",
                 loader() {
-                    console.log(`Load SignIn Page data. Is Authenticated: ${ApiAuthProvider.isAuthenticated() ? 'yes' : 'no'}`);
-
                     if (ApiAuthProvider.isAuthenticated()) {
                         return redirect("/");
                     }
@@ -40,6 +39,17 @@ const AppRouter = createBrowserRouter([
                     return null;
                 },
                 Component: SignInPage,
+            },
+            {
+                path: "signup",
+                loader() {
+                    if (ApiAuthProvider.isAuthenticated()) {
+                        return redirect("/");
+                    }
+
+                    return null;
+                },
+                Component: SignUpPage,
             },
         ],
     },

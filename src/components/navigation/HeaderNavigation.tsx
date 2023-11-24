@@ -56,6 +56,9 @@ const HeaderNavigation: React.FunctionComponent<NavigationProps> = ({user}) => {
         <AppBar
             color="transparent"
             position="static"
+            sx={{
+                mb: 2,
+            }}
         >
             <Container maxWidth="lg">
                 <Toolbar disableGutters>

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {toast} from "react-toastify";
 import {ApiAuthProvider} from "@/security/auth";
-import {Link, useNavigate, useRevalidator} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {
     Box,
     Container,
@@ -11,9 +11,8 @@ import {
 import LoginIcon from '@mui/icons-material/Login';
 import HourglassBottomIcon from "@mui/icons-material/HourglassBottom";
 
-const SignInPage: React.FunctionComponent = () => {
+const SignUpPage: React.FunctionComponent = () => {
     const navigate = useNavigate();
-    const revalidator = useRevalidator();
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
@@ -21,22 +20,20 @@ const SignInPage: React.FunctionComponent = () => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
 
-        const username = data.get('username')?.toString().trim() ?? '';
-        const password = data.get('password')?.toString().trim() ?? '';
+        const email = data.get('email')?.toString() ?? '';
+        const password = data.get('password')?.toString() ?? '';
 
-        if ('' === username || '' === password) {
+        if ('' === email || '' === password) {
             setIsLoading(false);
             toast.error('Empty credentials.');
             return;
         }
 
         try {
-            await ApiAuthProvider.signIn(username, password);
-            revalidator.revalidate();
-            navigate("/");
+            await ApiAuthProvider.signUp(email, password);
+            navigate("/signin");
         } catch (e:any) {
             setIsLoading(false);
-            console.log(e.message);
             toast.error(e.message);
             return;
         }
@@ -56,7 +53,7 @@ const SignInPage: React.FunctionComponent = () => {
                     textAlign: "center",
                 }}
             >
-                Sign in
+                Sign up
             </Typography>
 
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -64,9 +61,9 @@ const SignInPage: React.FunctionComponent = () => {
                     margin="normal"
                     required
                     fullWidth
-                    id="username"
+                    id="email"
                     label="Email Address"
-                    name="username"
+                    name="email"
                     autoComplete="email"
                     autoFocus
                 />
@@ -108,19 +105,8 @@ const SignInPage: React.FunctionComponent = () => {
                     </IconButton>
                 </Box>
             </Box>
-
-            <Typography
-                component="div"
-                variant="body1"
-                sx={{
-                    textAlign: "center",
-                }}
-            >
-                Have no account? <Link to={"/signup"}>Sign Up Now</Link>
-            </Typography>
-
         </Container>
-    )
+    );
 }
 
-export default SignInPage;
+export default SignUpPage;

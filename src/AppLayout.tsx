@@ -1,11 +1,11 @@
-import React, {PropsWithChildren} from "react";
+import React from "react";
 import HeaderNavigation from "@/components/navigation/HeaderNavigation";
 import {
     Box,
     Container,
     Typography, useTheme,
 } from "@mui/material";
-import {Outlet, useRevalidator, useRouteLoaderData} from "react-router-dom";
+import {Outlet, useRouteLoaderData} from "react-router-dom";
 import {IAuthUser} from "@/security/auth";
 
 interface IAppLayout {
