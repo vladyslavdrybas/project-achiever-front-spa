@@ -1,0 +1,57 @@
+/* Fonts */
+
+@font-face {
+    font-family: 'greycliff-heavy';
+    src: url('./greycliff/GreycliffCF-Heavy.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'greycliff-heavyoblique';
+    src: url('./greycliff/GreycliffCF-HeavyOblique.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'greycliff-extrabold';
+    src: url('./greycliff/GreycliffCF-ExtraBold.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'greycliff-bold';
+    src: url('./greycliff/GreycliffCF-Bold.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'greycliff-demibold';
+    src: url('./greycliff/GreycliffCF-DemiBold.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'greycliff-medium';
+    src: url('./greycliff/GreycliffCF-Medium.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'greycliff-mediumoblique';
+    src: url('./greycliff/GreycliffCF-MediumOblique.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'greycliff-regular';
+    src: url('./greycliff/GreycliffCF-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}

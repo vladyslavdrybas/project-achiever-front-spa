@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  spa:
+    container_name: ${APP_NAME:-achievernotifier}-spa-dev
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: nginx_server
+    networks:
+      - reverse_proxy_network
+      - default
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.spa-http.entrypoints=web"
+      - "traefik.http.routers.spa-http.rule=Host(`spa.achievernotifier.localhost`)"
+      - "traefik.http.routers.spa-http.middlewares=spa-https"
+      - "traefik.http.middlewares.spa-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.spa.entrypoints=websecure"
+      - "traefik.http.routers.spa.rule=Host(`spa.achievernotifier.localhost`)"
+      - "traefik.http.routers.spa.tls=true"
+      - "traefik.http.routers.spa.tls.domains[0].main=spa.achievernotifier.localhost"
+    volumes:
+      - ./build:/app
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/nginx/sites/:/etc/nginx/sites-available
+      - ./tmp/log/nginx:/var/log/nginx
+
+networks:
+  reverse_proxy_network:
+    external: true
