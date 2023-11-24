@@ -34,7 +34,6 @@ interface NavigationProps {
 }
 
 const HeaderNavigation: React.FunctionComponent<NavigationProps> = ({user}) => {
-    console.log('HeaderNavigation', user);
     const navigate = useNavigate();
 
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -175,7 +174,7 @@ const HeaderNavigation: React.FunctionComponent<NavigationProps> = ({user}) => {
                     { !user
                         && (
                             <ReactLink to="/signin">
-                                <SignInIcon sx={{ p: 0, mt: '8px' }}/>
+                                <SignInIcon sx={{ p: 0, mt: '13px' }}/>
                             </ReactLink>
                         )
                     }

@@ -1,11 +1,12 @@
 import React from "react";
 import HeaderNavigation from "@/components/navigation/HeaderNavigation";
 import {
+    Avatar,
     Box,
     Container,
     Typography, useTheme,
 } from "@mui/material";
-import {Outlet, useRouteLoaderData} from "react-router-dom";
+import {Link as ReactLink, Outlet, useRouteLoaderData} from "react-router-dom";
 import {IAuthUser} from "@/security/auth";
 
 interface IAppLayout {
@@ -14,8 +15,7 @@ interface IAppLayout {
 
 const AppLayout: React.FunctionComponent<IAppLayout> = ({outlet}) => {
     const theme = useTheme();
-    const loader = useRouteLoaderData("root");
-    const { user } = loader as { user: IAuthUser | null };
+    const { user } = useRouteLoaderData("root") as { user: IAuthUser | null };
 
     console.log('AppLayout', user);
 
@@ -44,9 +44,29 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({outlet}) => {
                 component="footer"
                 sx={{
                     p: 4,
+                    pt: 8,
                     marginTop: 'auto',
+                    display: "flex",
+                    flexDirection: "row",
+                    flexWrap: "nowrap",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    alignContent: "center",
                 }}
             >
+                <ReactLink
+                    to="/"
+                >
+                    <Avatar
+                        alt="logo"
+                        src="/logo.svg"
+                        sx={{
+                            width: "34px",
+                            height: "34px",
+                            mr: 2,
+                        }}
+                    />
+                </ReactLink>
                 <Typography
                     variant="body1"
                     component="div"
@@ -54,7 +74,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({outlet}) => {
                         textAlign: "center",
                     }}
                 >
-                    Copyright © { (new Date()).getFullYear()}
+                    Achiever Notifier Network © { (new Date()).getFullYear()}
                 </Typography>
             </Container>
         </Box>
