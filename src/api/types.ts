@@ -1,3 +1,5 @@
+import PostsCollectionRequest from "@/api/requests/PostsCollectionRequest";
+
 export enum TPageLength {
   five = 5,
   ten = 10,
@@ -23,6 +25,7 @@ export type TProfileResponse = {
   isEmailVerified: boolean;
   isBanned: boolean;
   isDeleted: boolean;
+  achievementsAmount?: number;
 }
 
 export type TSignInResponse = {
@@ -37,3 +40,5 @@ export type TAchievementsCollectionResponse = TAchievementViewResponse[];
 export type TAchievementPrerequisites = any;
 export type TUserViewResponse = any;
 export type TUserViewCollection = TUserViewResponse[];
+export type TPostViewResponse = any;
+export type TPostsCollection = TPostViewResponse[];

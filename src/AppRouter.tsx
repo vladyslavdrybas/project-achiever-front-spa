@@ -1,4 +1,4 @@
-import {createBrowserRouter, Navigate, redirect} from "react-router-dom";
+import {createBrowserRouter, Navigate, redirect, useParams} from "react-router-dom";
 import RootErrorBoundary from "@/RootErrorBoundary";
 import React from "react";
 import {ApiAuthProvider} from "@/security/auth";
@@ -6,6 +6,13 @@ import AppLayout from "@/AppLayout";
 import HomePage from "@/pages/HomePage";
 import SignInPage from "@/pages/auth/SignInPage";
 import SignUpPage from "@/pages/auth/SignUpPage";
+import AnnLayout from "@/layouts/AnnLayout";
+import ProfileShortBlockView from "@/components/an/ProfileShortBlockView";
+import Feed from "@/components/an/Feed";
+import ProfileRequest from "@/api/requests/ProfileRequest";
+import PostsCollection from "@/components/post/PostsCollection";
+import {toast} from "react-toastify";
+import PostsCollectionRequest from "@/api/requests/PostsCollectionRequest";
 
 const AppRouter = createBrowserRouter([
     {
@@ -50,6 +57,69 @@ const AppRouter = createBrowserRouter([
                     return null;
                 },
                 Component: SignUpPage,
+            },
+            {
+                id: "ann-user",
+                path: "ann/",
+                async loader({params}) {
+                    console.log('Ann loader params', params);
+
+                    if (!params.username) {
+                        toast.error('Not Found');
+                        return {leftBlocks:[]};
+                        // throw new Response('Not Found', {status:404});
+                    }
+
+                    const apiRequest = new ProfileRequest(params.username);
+                    let profile = null;
+                    try {
+                        await apiRequest.send();
+                        profile = apiRequest.response;
+                    } catch (e: any) {
+                        toast.error(e.message);
+                        return {leftBlocks:[]};
+                        // throw new Response(e.message, {status:400});
+                    }
+
+                    return {
+                        leftBlocks: [
+                            <ProfileShortBlockView profile={profile}/>,
+                        ],
+                    }
+                },
+                Component: AnnLayout,
+                children: [
+                    {
+                        id: "ann-user-posts-collection",
+                        path: ":username",
+                        async loader({params}) {
+                            if (!params.username) {
+                                toast.error('Not Found');
+                                return {leftBlocks:[]};
+                                // throw new Response('Not Found', {status:404});
+                            }
+
+                            console.log('ann-user-posts-collection', params)
+                            const apiRequest = new PostsCollectionRequest(params.username, 0, 5);
+                            let collection = [];
+                            try {
+                                await apiRequest.send();
+                                collection = apiRequest.response;
+                            } catch (e: any) {
+                                toast.error(e.message);
+                                return {leftBlocks:[]};
+                                // throw new Response(e.message, {status:400});
+                            }
+
+                            return {
+                                posts: collection,
+                                offset: 0,
+                                limit: 5,
+                            };
+                        },
+                        Component: PostsCollection,
+                    }
+                ]
             },
         ],
     },

@@ -155,9 +155,9 @@ const HeaderNavigation: React.FunctionComponent<NavigationProps> = ({user}) => {
                                 >
                                     {
                                         [
-                                            (<ReactLink to={`/an/${user.username}`}>Profile</ReactLink>),
-                                            (<ReactLink to={`/an/${user.username}/lists`}>Lists</ReactLink>),
-                                            (<ReactLink to={`/an/${user.username}/groups`}>Groups</ReactLink>),
+                                            (<ReactLink to={`/ann/${user.username}`}>Me</ReactLink>),
+                                            (<ReactLink to={`/ann/${user.username}/lists`}>Lists</ReactLink>),
+                                            (<ReactLink to={`/ann/${user.username}/groups`}>Groups</ReactLink>),
                                             (<ReactLink to={"/settins"}>Setting</ReactLink>),
                                             (<ReactLink to={"/signout"}>SignOut</ReactLink>),
                                         ].map((setting, index) => (

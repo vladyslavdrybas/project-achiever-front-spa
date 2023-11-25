@@ -96,6 +96,38 @@ let theme = createTheme(options);
 
 theme = createTheme(theme,{
     components: {
+        MuiBox: {
+            styleOverrides: {
+                root: {
+                },
+            },
+        },
+        MuiTypography: {
+            styleOverrides: {
+                root: {
+                    '&.post-title': {
+                        fontFamily: 'greycliff-bold',
+                        fontSize: '1.2rem',
+                    },
+                    '&.post-tag, &.date': {
+                        fontSize: '0.8rem',
+                    },
+
+                },
+            },
+        },
+        MuiLink: {
+            styleOverrides: {
+                root: {
+                    '&.user-stripe-link': {
+                        color: theme.palette.primary.main,
+                        textDecoration: 'none',
+                        fontSize: '1rem',
+                        fontFamily: 'greycliff-demibold',
+                    },
+                },
+            },
+        },
         MuiButton: {
             styleOverrides: {
                 root: {
@@ -145,24 +177,31 @@ theme = createTheme(theme,{
         MuiCard: {
             styleOverrides: {
                 root: {
-                    fontFamily: 'greycliff-demibold',
                     background: common.white,
                     boxShadow: `rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset`,
+                    '&.post-card': {
+                        boxShadow: 'none',
+                    },
                 }
             }
         },
         MuiCardHeader: {
             styleOverrides: {
                 root: {
+                    padding: '8px 0',
                     boxShadow: `rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset`,
                     // background: theme.palette.secondary.gradientHeader,
+                    '&.post-header': {
+                        boxShadow: 'none',
+                    },
                 }
             }
         },
         MuiCardContent: {
             styleOverrides: {
                 root: {
-                    paddingBottom: 0,
+                    padding: '8px 0',
+                    fontSize: '1rem'
                 }
             }
         },
@@ -230,10 +269,16 @@ theme = createTheme(theme,{
                         filter: `drop-shadow(13px 21px 13px ${colorSecondary[900]})`,
                     },
                     '&.avatar-navigation-logo': {
-                        width: 45,
-                        height: 45,
+                        width: '45px',
+                        height: '45px',
                         bgcolor: 'none',
                         borderRadius: 0,
+                    },
+                    '&.user-stripe-avatar': {
+                        width: '34px',
+                        height: '34px',
+                        marginRight: '8px',
+                        fontSize: '0.8rem',
                     },
                 },
             },

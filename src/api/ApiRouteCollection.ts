@@ -13,10 +13,12 @@ const _pool: Record<string, string> = {
   achievementsOfListView: '/achievement/list/[listId]/a/l/[offset]/[limit]',
   achievementView: '/achievement/list/[listId]/a/[achievementId]',
   achievementPrerequisitesView: '/achievement/prerequisite/tree/prerequisites/l/[listId]/a/[achievementId]',
+  achievementPrerequisitesTree: '/achievement/prerequisite/tree/[achievementId]',
   userListPublic: '/user/list/public/[offset]/[limit]',
   userProfile: '/user/[userId]',
   userInfoView: '/user/[userId]/info',
   userProfilePasswordChange: '/user/[userId]/passwordchange',
+  postsCollection: '/post/[user]/[offset]/[limit]',
 };
 
 const apiRoute = function (routeName: string, params: Record<string, string> = {}) {
