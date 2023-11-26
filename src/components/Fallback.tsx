@@ -1,48 +1,32 @@
 import React from "react";
 import {
-    Avatar,
-    Typography,
-    Container,
+  Box,
+  useTheme,
 } from "@mui/material";
+import Loading from "@/components/Loading";
 
 const Fallback: React.FunctionComponent = () => {
-    return (
-        <Container
-            maxWidth="md"
+  const theme = useTheme();
 
-            sx={{
-                display: "flex",
-                flexDirection: "column",
-                flexWrap: "nowrap",
-                justifyContent: "center",
-                alignItems: "center",
-                alignContent: "center",
-                mt: 2,
-                minHeight: "100vh",
-            }}
-        >
-            <Typography
-                variant="body1"
-                component="p"
-                sx={{
-                    textAlign: "center",
-                }}
-            >
-                Loading...
-            </Typography>
-
-            <Avatar
-                className="avatar-drop-shadow"
-                src="/logo.svg"
-                alt="Achiever Notifier Network"
-                sx={{
-                    width: 233,
-                    height: 233,
-                    mt: 4,
-                }}
-            />
-        </Container>
-    );
+  return (
+    <Box
+      sx={{
+        background: theme.palette.secondary.background,
+        display: "flex",
+        flexDirection: "column",
+        flexWrap: "nowrap",
+        justifyContent: "center",
+        alignItems: "center",
+        alignContent: "center",
+        m: 0,
+        p: 0,
+        minHeight: "100vh",
+        minWidth: "100vw",
+      }}
+    >
+      <Loading size={89}/>
+    </Box>
+  );
 }
 
 export default Fallback;

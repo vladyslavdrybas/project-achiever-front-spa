@@ -1,6 +1,7 @@
 /* tslint:disable max-line-length */
 /* Build palette https://m2.material.io/inline-tools/color/ */
 const rajah: Record<number, string> = {
+    10: '#f6f0e8',
     50: '#fff2e1',
     100: '#feddb5',
     200: '#fec786',

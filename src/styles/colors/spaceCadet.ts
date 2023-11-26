@@ -1,6 +1,7 @@
 /* tslint:disable max-line-length */
 /* Build palette https://m2.material.io/inline-tools/color/ */
 const spaceCadet: Record<number, string> = {
+    10: '#f2f4f6',
     50: '#e6eaf0',
     100: '#c0c9da',
     200: '#98a7c1',

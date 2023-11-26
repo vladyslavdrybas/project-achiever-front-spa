@@ -24,19 +24,19 @@ const AchievementPrerequisiteTree: FunctionComponent<AchievementPrerequisiteTree
     return null === rows ? (<>none</>) : (
         <TableContainer component={Box}>
             <Table aria-label="table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Priority</TableCell>
-                        <TableCell>Achievement</TableCell>
-                        <TableCell>Required</TableCell>
-                    </TableRow>
-                </TableHead>
+                {/*<TableHead>*/}
+                {/*    <TableRow>*/}
+                {/*        <TableCell>Priority</TableCell>*/}
+                {/*        <TableCell>Achievement</TableCell>*/}
+                {/*        <TableCell>Required</TableCell>*/}
+                {/*    </TableRow>*/}
+                {/*</TableHead>*/}
 
                 <TableBody>
                     {rows.map((row:any) => (
                         <TableRow key={row.id}>
                             <TableCell variant="body">{row.priority}</TableCell>
-                            <TableCell variant="body">
+                            <TableCell variant="body" className="table-cell-prerequisite-title">
                                 <Link
                                     href={'/achievement/' + row.lists[0].id + '/' + row.id}
                                 >
@@ -45,7 +45,7 @@ const AchievementPrerequisiteTree: FunctionComponent<AchievementPrerequisiteTree
 
                                 {row.title}
                             </TableCell>
-                            <TableCell variant="body">{row.isRequired}</TableCell>
+                            <TableCell variant="body">{row.isRequired ? 'required' : 'optional'}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

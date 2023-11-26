@@ -53,7 +53,6 @@ const HeaderNavigation: React.FunctionComponent<NavigationProps> = ({user}) => {
 
     return (
         <AppBar
-            color="transparent"
             position="static"
             sx={{
                 mb: 2,

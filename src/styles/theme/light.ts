@@ -11,15 +11,17 @@ const colorSecondary = rajah;
 
 declare module '@mui/material/styles' {
     interface PaletteColor {
-        gradientMain: string;
-        gradientLight: string;
-        gradientHeader: string;
+      background: string;
+      gradientMain: string;
+      gradientLight: string;
+      gradientHeader: string;
     }
 
     interface SimplePaletteColorOptions {
-        gradientMain?: string;
-        gradientLight?: string;
-        gradientHeader?: string;
+      background?: string;
+      gradientMain?: string;
+      gradientLight?: string;
+      gradientHeader?: string;
     }
 }
 
@@ -45,7 +47,7 @@ const typographyOptions: TypographyOptions = {
         fontFamily: 'greycliff-medium'
     },
     body1: {
-        fontSize: '1.2rem',
+        fontSize: '1rem',
         fontFamily: 'greycliff-regular',
         textAlign: 'justify',
     },
@@ -59,17 +61,20 @@ const typographyOptions: TypographyOptions = {
 const paletteOptions: PaletteOptions = {
     mode: "light",
     primary: {
-        main: colorPrimary[900],
-        light: colorPrimary[900],
-        gradientMain: `linear-gradient(120deg, ${colorPrimary[200]} 0%, ${colorPrimary[400]} 50%,  ${colorPrimary[700]} 75%, ${colorPrimary[900]} 100%)`,
-        gradientLight: `linear-gradient(90deg, ${colorPrimary[200]} 0%, ${colorPrimary[500]} 50%,  ${colorPrimary[700]} 75%, ${colorPrimary[900]} 100%)`,
-        gradientHeader: `linear-gradient(144deg, ${colorPrimary[200]} 0%, ${colorPrimary[300]} 50%,  ${colorPrimary[500]} 85%, ${colorPrimary[800]} 100%)`,
+      background: colorPrimary[10],
+      main: colorPrimary[900],
+      light: colorPrimary[900],
+      gradientMain: `linear-gradient(120deg, ${colorPrimary[200]} 0%, ${colorPrimary[400]} 50%,  ${colorPrimary[700]} 75%, ${colorPrimary[900]} 100%)`,
+      gradientLight: `linear-gradient(90deg, ${colorPrimary[200]} 0%, ${colorPrimary[500]} 50%,  ${colorPrimary[700]} 75%, ${colorPrimary[900]} 100%)`,
+      gradientHeader: `linear-gradient(144deg, ${colorPrimary[200]} 0%, ${colorPrimary[300]} 50%,  ${colorPrimary[500]} 85%, ${colorPrimary[800]} 100%)`,
     },
     secondary: {
-        main: colorSecondary[300],
-        gradientMain: `linear-gradient(120deg, ${colorSecondary[100]} 0%, ${colorSecondary[300]} 50%,  ${colorSecondary[400]} 75%, ${colorSecondary[800]} 100%)`,
-        gradientLight: `linear-gradient(90deg, ${colorSecondary[200]} 0%, ${colorSecondary[500]} 50%,  ${colorSecondary[700]} 75%, ${colorSecondary[900]} 100%)`,
-        gradientHeader: `linear-gradient(144deg, ${colorSecondary[200]} 0%, ${colorSecondary[300]} 50%,  ${colorSecondary[500]} 85%, ${colorSecondary[800]} 100%)`,
+      background: colorSecondary[10],
+      main: colorSecondary[300],
+      light: colorSecondary[900],
+      gradientMain: `linear-gradient(120deg, ${colorSecondary[100]} 0%, ${colorSecondary[300]} 50%,  ${colorSecondary[400]} 75%, ${colorSecondary[800]} 100%)`,
+      gradientLight: `linear-gradient(90deg, ${colorSecondary[200]} 0%, ${colorSecondary[500]} 50%,  ${colorSecondary[700]} 75%, ${colorSecondary[900]} 100%)`,
+      gradientHeader: `linear-gradient(144deg, ${colorSecondary[200]} 0%, ${colorSecondary[300]} 50%,  ${colorSecondary[500]} 85%, ${colorSecondary[800]} 100%)`,
     },
     success: {
         main: calPolyPomonaGreen[700],
@@ -107,7 +112,7 @@ theme = createTheme(theme,{
                 root: {
                     '&.post-title': {
                         fontFamily: 'greycliff-bold',
-                        fontSize: '1.2rem',
+                        fontSize: '1rem',
                     },
                     '&.post-tag, &.date': {
                         fontSize: '0.8rem',
@@ -170,7 +175,8 @@ theme = createTheme(theme,{
                 root: {
                     fontFamily: 'greycliff-demibold',
                     background: common.white,
-                    boxShadow: `rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset`,
+                    // boxShadow: `rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset`,
+                    boxShadow: `rgba(0, 0, 0, 0.2) 0px 0px 0px 1px;`,
                 }
             }
         },
@@ -178,32 +184,36 @@ theme = createTheme(theme,{
             styleOverrides: {
                 root: {
                     background: common.white,
-                    boxShadow: `rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset`,
+                    // boxShadow: `rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset`,
+                    boxShadow: `rgba(0, 0, 0, 0.2) 0px 0px 0px 1px;`,
                     '&.post-card': {
                         boxShadow: 'none',
-                    },
+                    }
                 }
             }
         },
         MuiCardHeader: {
-            styleOverrides: {
-                root: {
-                    padding: '8px 0',
-                    boxShadow: `rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset`,
-                    // background: theme.palette.secondary.gradientHeader,
-                    '&.post-header': {
-                        boxShadow: 'none',
-                    },
-                }
+          styleOverrides: {
+            root: {
+              padding: '8px 0',
+              boxShadow: `none`,
+              // background: theme.palette.secondary.gradientHeader,
+              '&.post-header': {
+                  boxShadow: 'none',
+              },
             }
+          }
         },
         MuiCardContent: {
-            styleOverrides: {
-                root: {
-                    padding: '8px 0',
-                    fontSize: '1rem'
-                }
+          styleOverrides: {
+            root: {
+              padding: '8px 0',
+              fontSize: '1rem',
+              '&:last-child': {
+                paddingBottom: '13px',
+              }
             }
+          }
         },
         MuiCardAction: {
             styleOverrides: {
@@ -223,7 +233,9 @@ theme = createTheme(theme,{
         MuiAppBar: {
             styleOverrides: {
                 root: {
-                    boxShadow: `rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset`,
+                  // boxShadow: `rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset`,
+                  boxShadow: `rgba(0, 0, 0, 0.2) 0px 0px 0px 1px;`,
+                  background: common.white,
                 }
             }
         },
@@ -254,7 +266,7 @@ theme = createTheme(theme,{
                         color: common.white,
                     },
                     '.MuiTableCell-body .MuiLink-root &:hover': {
-                        color: theme.palette.secondary.main,
+                        color: theme.palette.secondary.background,
                     },
                     '.MuiTableCell-body .MuiLink-root &': {
                         marginBottom: '-0.4rem',
@@ -283,22 +295,63 @@ theme = createTheme(theme,{
                 },
             },
         },
+        MuiTableRow: {
+          styleOverrides: {
+            root: {
+                "&:last-child .MuiTableCell-root": {
+                    borderBottom: 'none',
+                }
+            },
+          },
+        },
         MuiTableCell: {
           styleOverrides: {
             root: {
               fontFamily: 'greycliff-demibold',
-              color: theme.palette.secondary.main,
+              padding: '8px 3px',
+              textAlign: 'center',
+              color: theme.palette.primary.main,
               '&.MuiTableCell-head': {
-                fontSize: '1.2rem',
+                fontSize: '0.8rem',
+                color: theme.palette.secondary.main,
               },
               '&.MuiTableCell-body': {
-                fontSize: '1rem',
-                color: theme.palette.primary.main,
+                fontSize: '0.8rem',
+              },
+              '&.table-cell-prerequisite-title': {
+                textAlign: 'left',
               },
             },
           },
         },
-    }
+        MuiTabPanel: {
+            styleOverrides: {
+                root: {
+                    padding: 0,
+                },
+            },
+        },
+        MuiTabs: {
+            styleOverrides: {
+                root: {
+                  minHeight: '21px',
+                },
+            },
+        },
+        MuiTab: {
+            styleOverrides: {
+                root: {
+                  minHeight: 0,
+                  minWidth: 0,
+                  fontSize: '0.8rem',
+                  padding: '3px 8px',
+                  "&:first-child": {
+                    paddingLeft: 0,
+                  },
+                },
+            },
+        },
+    },
 })
 
 export { theme };

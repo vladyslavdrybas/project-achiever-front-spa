@@ -9,7 +9,6 @@ import '@/styles/tags.css';
 import {
   CssBaseline,
   ThemeProvider,
-  Box,
   Theme,
 } from "@mui/material";
 import AppRouter from "@/AppRouter";

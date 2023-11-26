@@ -13,6 +13,7 @@ import {
 import AchievementPrerequisiteTree from "@/components/post/AchievementPrerequisiteTree";
 import {getAchievementPrerequisites} from "@/util/AchievementActions";
 import {toast} from "react-toastify";
+import Loading from "@/components/Loading";
 
 interface PostTabsProps {
     post: TPostViewResponse;
@@ -26,7 +27,7 @@ const PostTabs: React.FunctionComponent<PostTabsProps> = ({post}) => {
         console.log(newValue);
         console.log(prerequisites);
         if (newValue.startsWith('post-prerequisites') && !prerequisites) {
-            await showPrerequisites(post.data);
+            showPrerequisites(post.data);
         }
         setValue(newValue);
     };
@@ -53,11 +54,15 @@ const PostTabs: React.FunctionComponent<PostTabsProps> = ({post}) => {
                         )}
                     </TabList>
                 </Box>
-                <TabPanel value={`post-share-${post.id}`}>Share</TabPanel>
-                <TabPanel value={`post-comments-${post.id}`}>Comments</TabPanel>
+                <TabPanel value={`post-share-${post.id}`}>
+                    Share
+                </TabPanel>
+                <TabPanel value={`post-comments-${post.id}`}>
+                    Comments
+                </TabPanel>
                 {post.data.object.toLowerCase() === 'achievement' && (
                     <TabPanel value={`post-prerequisites-${post.id}`}>
-                        {null === prerequisites ? (<>loading...</>) : (<AchievementPrerequisiteTree prerequisites={prerequisites}/>)}
+                        {null === prerequisites ? (<Loading />) : (<AchievementPrerequisiteTree prerequisites={prerequisites}/>)}
                     </TabPanel>
                 )}
             </TabContext>

@@ -16,7 +16,6 @@ const ProfileShortBlockView: React.FunctionComponent<ProfileShortBlockViewProps>
     return !profile ? (<></>) : (
         <Paper
             sx={{
-                minHeight: "20vh",
                 display: "flex",
                 flexDirection: "column",
                 flexWrap: "nowrap",

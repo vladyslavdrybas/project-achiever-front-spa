@@ -25,7 +25,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({outlet}) => {
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                background: theme.palette.secondary.gradientMain,
+                background: theme.palette.secondary.background,
                 minHeight: '100vh',
             }}
         >
