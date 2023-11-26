@@ -124,11 +124,17 @@ theme = createTheme(theme,{
         MuiLink: {
             styleOverrides: {
                 root: {
-                    '&.user-stripe-link': {
+                    '&.user-stripe-link, &.router-link': {
                         color: theme.palette.primary.main,
                         textDecoration: 'none',
                         fontSize: '1rem',
                         fontFamily: 'greycliff-demibold',
+                    },
+                    '&.list-title-link': {
+                        color: theme.palette.secondary.main,
+                    },
+                    '&.list-item-link': {
+                      textAlign: 'left',
                     },
                 },
             },
@@ -275,25 +281,31 @@ theme = createTheme(theme,{
             },
         },
         MuiAvatar: {
-            styleOverrides: {
-                root: {
-                    '&.avatar-drop-shadow': {
-                        filter: `drop-shadow(13px 21px 13px ${colorSecondary[900]})`,
-                    },
-                    '&.avatar-navigation-logo': {
-                        width: '45px',
-                        height: '45px',
-                        bgcolor: 'none',
-                        borderRadius: 0,
-                    },
-                    '&.user-stripe-avatar': {
-                        width: '34px',
-                        height: '34px',
-                        marginRight: '8px',
-                        fontSize: '0.8rem',
-                    },
-                },
+          styleOverrides: {
+            root: {
+              '&.avatar-drop-shadow': {
+                filter: `drop-shadow(13px 21px 13px ${colorSecondary[900]})`,
+              },
+              '&.avatar-navigation-logo': {
+                width: '45px',
+                height: '45px',
+                bgcolor: 'none',
+                borderRadius: 0,
+              },
+              '&.user-stripe-avatar': {
+                width: '34px',
+                height: '34px',
+                marginRight: '8px',
+                fontSize: '0.8rem',
+                borderRadius: '100%',
+              },
+              '&.user-info-block-avatar': {
+                width: '89px',
+                height: '89px',
+                borderRadius: '100%',
+              },
             },
+          },
         },
         MuiTableRow: {
           styleOverrides: {

@@ -1,17 +1,20 @@
 import React from "react";
 import {
-    Box,
-    Card,
-    CardContent,
-    CardHeader,
-    Typography,
+  Box,
+  Card,
+  CardContent,
+  CardHeader,
+  Typography,
 } from "@mui/material";
+import {thumb} from "@/artifacts/faked";
 
 interface PostAchievementProps {
     achievement: any;
 }
 
 const PostAchievementView: React.FunctionComponent<PostAchievementProps> = ({achievement}) => {
+  const thumbnail = achievement.thumbnail ?? thumb();
+
     return (
         <Card
             className="post-card"
@@ -54,6 +57,31 @@ const PostAchievementView: React.FunctionComponent<PostAchievementProps> = ({ach
                 >
                     {achievement.description}
                 </Typography>
+
+                {thumbnail && (
+                  <Box
+                    component="div"
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      alignContent: 'center',
+                      p: 1
+                    }}
+                  >
+                    <Box
+                      component="img"
+                      className="post-thumbnail"
+                      sx={{
+                        maxHeight: '377px',
+                        maxWidth: '100%',
+                      }}
+                      src={thumbnail}
+                      alt={achievement.title}
+                    />
+                  </Box>
+                )}
 
                 <Box
                     className="post-tags flex-row-start"

@@ -9,6 +9,7 @@ import React from "react";
 import {Link as RouterLink, useRouteLoaderData} from "react-router-dom";
 import Link from "@mui/material/Link";
 import {IAuthUser} from "@/security/auth";
+import UserProfileAvatar from "@/components/UserProfileAvatar";
 
 interface UserInfoStripeProps {
     user: any;
@@ -29,16 +30,17 @@ const UserInfoStripe: React.FunctionComponent<UserInfoStripeProps> = ({user}) =>
                 alignContent: 'center',
             }}
         >
-            <Avatar
-                className="user-stripe-avatar"
-                sx={{
-                    backgroundColor: colorFromUsername(user.username),
-                }}
-            >
-                { user.firstname ? user.firstname[0].toUpperCase() : '' }
-                { user.lastname ? user.lastname[0].toUpperCase() : '' }
-                { !user.lastname && !user.firstname ? user.username[0].toUpperCase() : '' }
-            </Avatar>
+          <UserProfileAvatar profile={user} cls="user-stripe-avatar"/>
+            {/*<Avatar*/}
+            {/*    className="user-stripe-avatar"*/}
+            {/*    sx={{*/}
+            {/*        backgroundColor: colorFromUsername(user.username),*/}
+            {/*    }}*/}
+            {/*>*/}
+            {/*    { user.firstname ? user.firstname[0].toUpperCase() : '' }*/}
+            {/*    { user.lastname ? user.lastname[0].toUpperCase() : '' }*/}
+            {/*    { !user.lastname && !user.firstname ? user.username[0].toUpperCase() : '' }*/}
+            {/*</Avatar>*/}
 
             <Link
                 className="user-stripe-link router-link"

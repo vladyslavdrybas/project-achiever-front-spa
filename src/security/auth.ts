@@ -17,6 +17,7 @@ export interface IAuthUser {
     username: string | null;
     firstname: string | null;
     lastname: string | null;
+    avatar: string | null;
     isAuthenticated(): boolean;
 }
 
@@ -29,6 +30,7 @@ export const ApiAuthProvider: IAuthProvider = {
             username: localStorage.getItem(StorageKeys.LOGGED_USER_USERNAME),
             firstname: localStorage.getItem(StorageKeys.LOGGED_USER_FIRSTNAME),
             lastname: localStorage.getItem(StorageKeys.LOGGED_USER_LASTNAME),
+            avatar: null,
 
             isAuthenticated(): boolean {
                 return this.id !== null

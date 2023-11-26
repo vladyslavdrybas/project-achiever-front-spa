@@ -26,6 +26,7 @@ export type TProfileResponse = {
   isBanned: boolean;
   isDeleted: boolean;
   achievementsAmount?: number;
+  avatar?: string;
 }
 
 export type TSignInResponse = {

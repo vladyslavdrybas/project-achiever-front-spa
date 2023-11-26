@@ -7,12 +7,16 @@ import HomePage from "@/pages/HomePage";
 import SignInPage from "@/pages/auth/SignInPage";
 import SignUpPage from "@/pages/auth/SignUpPage";
 import AnnLayout from "@/layouts/AnnLayout";
-import ProfileShortBlockView from "@/components/an/ProfileShortBlockView";
-import Feed from "@/components/an/Feed";
+import ProfileShortUserView from "@/components/an/ProfileShortUserView";
 import ProfileRequest from "@/api/requests/ProfileRequest";
 import PostsCollection from "@/components/post/PostsCollection";
 import {toast} from "react-toastify";
 import PostsCollectionRequest from "@/api/requests/PostsCollectionRequest";
+import ProfileUserListsView from "@/components/an/ProfileUserListsView";
+import {profileFollowed, profileFollowers, profileGroups, profileLists} from "@/artifacts/faked";
+import ProfileUserGroupsView from "@/components/an/ProfileUserGroupsView";
+import ProfileUserFollowersView from "@/components/an/ProfileUserFollowersView";
+import ProfileUserFollowedView from "@/components/an/ProfileUserFollowedView";
 
 const AppRouter = createBrowserRouter([
     {
@@ -22,6 +26,8 @@ const AppRouter = createBrowserRouter([
         errorElement: <AppLayout outlet={<RootErrorBoundary />} />,
         loader() {
             ApiAuthProvider.authenticate();
+
+            console.log('Loader AUTH', ApiAuthProvider.user);
 
             return {
                 user: ApiAuthProvider.user,
@@ -81,9 +87,15 @@ const AppRouter = createBrowserRouter([
                         // throw new Response(e.message, {status:400});
                     }
 
+
+
                     return {
                         leftBlocks: [
-                            <ProfileShortBlockView profile={profile}/>,
+                            <ProfileShortUserView profile={profile}/>,
+                            <ProfileUserListsView profile={profile} lists={profileLists}/>,
+                            <ProfileUserGroupsView profile={profile} groups={profileGroups}/>,
+                            <ProfileUserFollowersView profile={profile} followers={profileFollowers}/>,
+                            <ProfileUserFollowedView profile={profile} followed={profileFollowed}/>,
                         ],
                     }
                 },

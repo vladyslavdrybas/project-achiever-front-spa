@@ -15,6 +15,7 @@ import SignInIcon from '@mui/icons-material/Login'
 import {IAuthUser} from "@/security/auth";
 import {Link as ReactLink, useNavigate} from "react-router-dom";
 import colorFromUsername from "@/util/ColorFromUsername";
+import UserProfileAvatar from "@/components/UserProfileAvatar";
 
 const pages: any[] = [
     {
@@ -121,20 +122,21 @@ const HeaderNavigation: React.FunctionComponent<NavigationProps> = ({user}) => {
                         && (
                             <Box sx={{ flexGrow: 0 }}>
                                 <Tooltip title="Open settings">
-                                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, mt: '8px' }}>
-                                        <Avatar
-                                            sx={{
-                                                backgroundColor: colorFromUsername(user.username ?? 'AN'),
-                                                width: '34px',
-                                                height: '34px',
-                                            }}
-                                            aria-label="recipe"
-                                        >
-                                            { user.firstname ? user.firstname[0].toUpperCase() : '' }
-                                            { user.lastname ? user.lastname[0].toUpperCase() : '' }
-                                            { !user.lastname && !user.firstname ? (user.username ?? 'AN')[0].toUpperCase() : '' }
-                                        </Avatar>
-                                    </IconButton>
+                                    <Button onClick={handleOpenUserMenu} sx={{ p: 0, mt: '8px' }}>
+                                      <UserProfileAvatar profile={user} cls="user-stripe-avatar"/>
+                                        {/*<Avatar*/}
+                                        {/*    sx={{*/}
+                                        {/*        backgroundColor: colorFromUsername(user.username ?? 'AN'),*/}
+                                        {/*        width: '34px',*/}
+                                        {/*        height: '34px',*/}
+                                        {/*    }}*/}
+                                        {/*    aria-label="recipe"*/}
+                                        {/*>*/}
+                                        {/*    { user.firstname ? user.firstname[0].toUpperCase() : '' }*/}
+                                        {/*    { user.lastname ? user.lastname[0].toUpperCase() : '' }*/}
+                                        {/*    { !user.lastname && !user.firstname ? (user.username ?? 'AN')[0].toUpperCase() : '' }*/}
+                                        {/*</Avatar>*/}
+                                    </Button>
                                 </Tooltip>
                                 <Menu
                                     sx={{ mt: '45px' }}
