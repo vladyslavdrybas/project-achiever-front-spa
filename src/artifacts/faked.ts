@@ -29,6 +29,7 @@ export const thumb = (): string => {
     '/faked/thumb/img_4.png',
     '/faked/thumb/img_5.png',
     '/faked/thumb/img_6.png',
+    '/faked/thumb/img_7.png',
   ]);
 };
 
