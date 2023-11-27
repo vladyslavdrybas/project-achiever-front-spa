@@ -24,6 +24,13 @@ const PostAchievementView: React.FunctionComponent<PostAchievementProps> = ({ach
                 subheader={
                     <Box
                         className="post-achievement-dates"
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          flexWrap: 'wrap',
+                          alignItems: 'start',
+                          alignContent: 'center',
+                        }}
                     >
                       <Typography
                         className="post-achievement-done-at date"

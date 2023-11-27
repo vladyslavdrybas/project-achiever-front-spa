@@ -32,6 +32,8 @@ const AchievementAddBlock: React.FunctionComponent<AchievementAddBlockProps> = (
   profileGroups.forEach((i) => groups[i.id] = i.title)
 
   const maxHashes: number = 10;
+  const formId = 'achievement-add-form';
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isCreating, setIsCreating] = useState<boolean>(false);
   const [completeAt, setCompleteAt] = useState<Dayjs | null>(null);
@@ -64,6 +66,12 @@ const AchievementAddBlock: React.FunctionComponent<AchievementAddBlockProps> = (
       permissionSelectedGroups,
     ]);
     setIsLoading(false);
+    setIsCreating(!isCreating);
+    setHashTags([]);
+    setPermissionSelectedGroups([]);
+    setIsPermissionGroups(false);
+    setStartAt(null);
+    setCompleteAt(null);
   }
 
   const handleSelectGroupChange = (event: SelectChangeEvent<typeof permissionSelectedGroups>) => {
@@ -91,7 +99,7 @@ const AchievementAddBlock: React.FunctionComponent<AchievementAddBlockProps> = (
       }}
     >
       <Box
-        className="user-stripe flex-row-start"
+        className="flex-row-start"
         sx={{
           display: 'flex',
           flexDirection: 'row',
@@ -102,24 +110,31 @@ const AchievementAddBlock: React.FunctionComponent<AchievementAddBlockProps> = (
         }}
       >
         <UserProfileAvatar profile={user} cls="user-stripe-avatar"/>
-        <Button
-          onClick = {() => {setIsCreating(!isCreating)}}
-        >
-          {isCreating ? 'Stop adding ' : 'Add '} achievement
-        </Button>
+
+        {!isCreating && (
+          <Button
+            onClick = {() => {setIsCreating(!isCreating)}}
+          >
+            Add achievement
+          </Button>
+        )}
+
       </Box>
 
       {isCreating && (
         <Box
+          id={formId}
+          className="form form-add achievement-form"
           component="form"
           onSubmit={handleAddAchievement}
         >
           <TextField
+            className="form-add-textfield"
             disabled={isLoading}
             margin="normal"
             required
             fullWidth
-            id="title"
+            id={`${formId}-title`}
             label="Title"
             name="title"
             sx={{
@@ -128,11 +143,12 @@ const AchievementAddBlock: React.FunctionComponent<AchievementAddBlockProps> = (
             }}
           />
           <TextField
+            className="form-add-textfield"
             disabled={isLoading}
             margin="normal"
             required
             fullWidth
-            id="description"
+            id={`${formId}-description`}
             label="Description"
             name="description"
             multiline
@@ -143,6 +159,7 @@ const AchievementAddBlock: React.FunctionComponent<AchievementAddBlockProps> = (
             }}
           />
           <DateTimePicker
+            className="form-add-date-time-picker"
             disabled={isLoading}
             value={startAt}
             onChange={(e: Dayjs|null) => {
@@ -157,6 +174,7 @@ const AchievementAddBlock: React.FunctionComponent<AchievementAddBlockProps> = (
             }}
           />
           <DateTimePicker
+            className="form-add-date-time-picker"
             disabled={isLoading}
             value={completeAt}
             onChange={(e: Dayjs|null) => {
@@ -211,6 +229,7 @@ const AchievementAddBlock: React.FunctionComponent<AchievementAddBlockProps> = (
               ))
             }
             renderInput={(params) => <TextField
+                className="form-add-textfield"
                 label="Add Hash Tags"
                 {...params}
                 onKeyDown={(e: any) => {
@@ -239,10 +258,11 @@ const AchievementAddBlock: React.FunctionComponent<AchievementAddBlockProps> = (
           />
 
           <FormControl fullWidth sx={{mb: 1, mt: 0,}}>
-            <InputLabel id="select-list-label">List</InputLabel>
+            <InputLabel id={`${formId}-select-list-label`}>List</InputLabel>
             <Select
-              labelId="select-list-label"
-              id="list"
+              className="form-add-select"
+              labelId={`${formId}-select-list-label`}
+              id={`${formId}-select-list`}
               label="List"
               name="list"
               required
@@ -254,10 +274,11 @@ const AchievementAddBlock: React.FunctionComponent<AchievementAddBlockProps> = (
           </FormControl>
 
           <FormControl fullWidth sx={{mb: 1, mt: 0,}}>
-            <InputLabel id="select-whocansee-label">Who can see</InputLabel>
+            <InputLabel id={`${formId}-select-whocansee-label`}>Who can see</InputLabel>
             <Select
-              labelId="select-whocansee-label"
-              id="whocansee"
+              className="form-add-select"
+              labelId={`${formId}-select-whocansee-label`}
+              id={`${formId}-select-whocansee`}
               label="Who can see"
               name="whocansee"
               required
@@ -281,15 +302,16 @@ const AchievementAddBlock: React.FunctionComponent<AchievementAddBlockProps> = (
 
           {isPermissionGroups && (
             <FormControl fullWidth sx={{mb: 1, mt: 0,}}>
-              <InputLabel id="select-group-label">Groups</InputLabel>
+              <InputLabel id={`${formId}-select-groups-label`}>Groups</InputLabel>
               <Select
-                labelId="select-group-label"
+                className="form-add-select"
+                labelId={`${formId}-select-groups-label`}
                 label="Groups   "
-                id="select-group-multiple-chip"
+                id={`${formId}-select-groups`}
                 multiple
                 value={permissionSelectedGroups}
                 onChange={handleSelectGroupChange}
-                input={<OutlinedInput id="achievement-add-select-group-chip" label="Chip" />}
+                input={<OutlinedInput id={`${formId}-select-groups-input`} label="Chip" />}
                 renderValue={(selected: any) => (
                   <>
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
@@ -321,6 +343,8 @@ const AchievementAddBlock: React.FunctionComponent<AchievementAddBlockProps> = (
             }}
           >
             <Button
+              className="form-add-btn btn-action"
+              id={`${formId}-btn-close`}
               disabled={isLoading}
               onClick = {() => {setIsCreating(!isCreating)}}
               sx={{
@@ -330,6 +354,8 @@ const AchievementAddBlock: React.FunctionComponent<AchievementAddBlockProps> = (
               Close
             </Button>
             <Button
+              className="form-add-btn btn-action"
+              id={`${formId}-btn-submit`}
               disabled={isLoading}
               type="submit"
               sx={{
