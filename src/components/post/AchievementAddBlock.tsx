@@ -7,6 +7,8 @@ import {
 import UserProfileAvatar from "@/components/UserProfileAvatar";
 import {Dayjs} from "dayjs";
 import {DateTimePicker} from "@mui/x-date-pickers";
+import {profileGroups, profileLists} from "@/artifacts/faked";
+import {toast} from "react-toastify";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -24,25 +26,19 @@ interface AchievementAddBlockProps {
 }
 
 const AchievementAddBlock: React.FunctionComponent<AchievementAddBlockProps> = ({user}) => {
+  const lists: Record<string,string> = {};
+  const groups: Record<string,string> = {};
+  profileLists.forEach((i) => lists[i.id] = i.title)
+  profileGroups.forEach((i) => groups[i.id] = i.title)
+
+  const maxHashes: number = 10;
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isCreating, setIsCreating] = useState<boolean>(false);
   const [completeAt, setCompleteAt] = useState<Dayjs | null>(null);
   const [startAt, setStartAt] = useState<Dayjs | null>(null);
-  const [tags, setTags] = useState<string[]>(['default', 'en', 'ua123']);
+  const [hashTags, setHashTags] = useState<string[]>([]);
   const [isPermissionGroups, setIsPermissionGroups] = useState<boolean>(false);
   const [permissionSelectedGroups, setPermissionSelectedGroups] = useState<string[]>([]);
-
-  const groups: Record<string,string> = {
-    'group-uuid1': 'Group1',
-    'group-uuid2': 'Group2',
-    'group-uuid3': 'Group3',
-  }
-
-  const lists: Record<string,string> = {
-    'list-uuid1': 'List1',
-    'list-uuid2': 'List2',
-    'list-uuid3': 'List3',
-  }
 
   const handleAddAchievement = async (event: React.FormEvent<HTMLFormElement>) => {
     setIsLoading(true);
@@ -62,7 +58,7 @@ const AchievementAddBlock: React.FunctionComponent<AchievementAddBlockProps> = (
       description,
       startDateTime,
       completeDateTime,
-      tags,
+      hashTags,
       list,
       whocansee,
       permissionSelectedGroups,
@@ -180,23 +176,33 @@ const AchievementAddBlock: React.FunctionComponent<AchievementAddBlockProps> = (
             options={[]}
             freeSolo
             multiple
-            value={tags}
+            value={hashTags}
             onChange={(event: any, newValues: string[] | null) => {
                 if (null === newValues) {
                   newValues = [];
                 }
                 if (newValues) {
-                  const tag = newValues[newValues.length - 1].trim();
+                  const hashTag = newValues[newValues.length - 1].trim();
+
+                  if (hashTag === '') {
+                    newValues.pop();
+                    toast.error(`Trying to add empty hash tag.`);
+                    return;
+                  }
+
                   for (let i = 0; i < newValues.length - 2; i++)
                   {
-                    if (newValues[i] === tag) {
+                    if (newValues[i] === hashTag) {
                       newValues.pop();
                       break;
                     }
                   }
                 }
-                newValues = newValues.slice(0,10);
-                setTags(newValues);
+                if (newValues.length > maxHashes) {
+                  newValues = newValues.slice(0,maxHashes);
+                  toast.error(`Max ${maxHashes} hash tags allowed.`);
+                }
+                setHashTags(newValues);
               }
             }
             renderTags={(value, props) =>
@@ -205,19 +211,25 @@ const AchievementAddBlock: React.FunctionComponent<AchievementAddBlockProps> = (
               ))
             }
             renderInput={(params) => <TextField
-                label="Add Hashes"
+                label="Add Hash Tags"
                 {...params}
                 onKeyDown={(e: any) => {
                   if (e.key === " " && e.target.value) {
-                    const tag = e.target.value.toString().trim();
-                    if (!tags.includes(tag)) {
-                      if (tags.length < 10) {
-                        tags.push(tag);
-                        setTags(tags);
+                    const hashTag = e.target.value.toString().trim();
+                    if (hashTag === '') {
+                      toast.error(`Trying to add empty hash tag.`);
+                      return;
+                    }
+                    if (!hashTags.includes(hashTag)) {
+                      if (hashTags.length < maxHashes) {
+                        hashTags.push(hashTag);
+                        setHashTags(hashTags);
+                      } else {
+                        toast.error(`Max ${maxHashes} hash tags allowed.`);
                       }
                       e.target.value = null;
                     } else {
-                      e.target.value = tag;
+                      e.target.value = hashTag;
                     }
                   }
                 }}

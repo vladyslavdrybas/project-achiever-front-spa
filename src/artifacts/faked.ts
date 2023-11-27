@@ -33,7 +33,7 @@ export const thumb = (): string => {
   ]);
 };
 
-export const profileLists = [
+export const profileLists: Record<string,string>[] = [
   {
     'id': faker.string.uuid(),
     'title': faker.person.jobTitle(),
@@ -80,7 +80,7 @@ export const profileLists = [
   },
 ];
 
-export const profileGroups = [
+export const profileGroups: Record<string,string>[] = [
   {
     'id': faker.string.uuid(),
     'title': faker.location.city(),
@@ -123,7 +123,7 @@ export const profileGroups = [
   },
 ];
 
-export const profileFollowers = [
+export const profileFollowers: Record<string,string>[] = [
   {
     'username': 'u' + faker.string.alphanumeric(13) + '.' + faker.string.alphanumeric(6),
     'name': faker.person.fullName(),
@@ -151,7 +151,7 @@ export const profileFollowers = [
   },
 ];
 
-export const profileFollowed = [
+export const profileFollowed: Record<string,string>[] = [
   {
     'username': 'u' + faker.string.alphanumeric(13) + '.' + faker.string.alphanumeric(6),
     'name': faker.person.fullName(),
