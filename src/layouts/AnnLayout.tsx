@@ -6,7 +6,7 @@ import {
 import {Outlet, useRouteLoaderData} from "react-router-dom";
 
 const AnnLayout: React.FunctionComponent = () => {
-    const { leftBlocks } = useRouteLoaderData('ann-user') as { leftBlocks: React.ReactElement[] };
+    const { leftBlocks, middleBlocks } = useRouteLoaderData('ann-user') as { leftBlocks: React.ReactElement[], middleBlocks: React.ReactElement[] };
 
     return (
         <Grid container spacing={2}>
@@ -14,6 +14,7 @@ const AnnLayout: React.FunctionComponent = () => {
                 {leftBlocks.map(e => (<>{e}</>))}
             </Grid>
             <Grid item xs={9}>
+                {middleBlocks.map(e => (<>{e}</>))}
                 <Outlet />
             </Grid>
         </Grid>

@@ -17,6 +17,7 @@ import {profileFollowed, profileFollowers, profileGroups, profileLists} from "@/
 import ProfileUserGroupsView from "@/components/an/ProfileUserGroupsView";
 import ProfileUserFollowersView from "@/components/an/ProfileUserFollowersView";
 import ProfileUserFollowedView from "@/components/an/ProfileUserFollowedView";
+import AchievementAddBlock from "@/components/post/AchievementAddBlock";
 
 const AppRouter = createBrowserRouter([
     {
@@ -87,15 +88,16 @@ const AppRouter = createBrowserRouter([
                         // throw new Response(e.message, {status:400});
                     }
 
-
-
                     return {
                         leftBlocks: [
-                            <ProfileShortUserView profile={profile}/>,
-                            <ProfileUserListsView profile={profile} lists={profileLists}/>,
-                            <ProfileUserGroupsView profile={profile} groups={profileGroups}/>,
-                            <ProfileUserFollowersView profile={profile} followers={profileFollowers}/>,
-                            <ProfileUserFollowedView profile={profile} followed={profileFollowed}/>,
+                          <ProfileShortUserView profile={profile}/>,
+                          <ProfileUserListsView profile={profile} lists={profileLists}/>,
+                          <ProfileUserGroupsView profile={profile} groups={profileGroups}/>,
+                          <ProfileUserFollowersView profile={profile} followers={profileFollowers}/>,
+                          <ProfileUserFollowedView profile={profile} followed={profileFollowed}/>,
+                        ],
+                        middleBlocks: [
+                          <AchievementAddBlock user={profile} />,
                         ],
                     }
                 },

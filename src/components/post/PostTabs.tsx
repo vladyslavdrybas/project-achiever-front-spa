@@ -11,9 +11,10 @@ import {
     TabPanel,
 } from "@mui/lab";
 import AchievementPrerequisiteTree from "@/components/post/AchievementPrerequisiteTree";
-import {getAchievementPrerequisites} from "@/util/AchievementActions";
+import {getAchievementPrerequisites} from "@/util/AchievementUtils";
 import {toast} from "react-toastify";
 import Loading from "@/components/Loading";
+import PostShares from "@/components/post/PostShares";
 
 interface PostTabsProps {
     post: TPostViewResponse;
@@ -55,7 +56,7 @@ const PostTabs: React.FunctionComponent<PostTabsProps> = ({post}) => {
                     </TabList>
                 </Box>
                 <TabPanel value={`post-share-${post.id}`}>
-                    Share
+                    <PostShares post={post}/>
                 </TabPanel>
                 <TabPanel value={`post-comments-${post.id}`}>
                     Comments

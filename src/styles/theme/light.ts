@@ -271,6 +271,9 @@ theme = createTheme(theme,{
                     '&:hover': {
                         color: common.white,
                     },
+                    '.share-buttons &:hover': {
+                        color: theme.palette.primary.main,
+                    },
                     '.MuiTableCell-body .MuiLink-root &:hover': {
                         color: theme.palette.secondary.background,
                     },

@@ -62,9 +62,6 @@ const UserInfoStripe: React.FunctionComponent<UserInfoStripeProps> = ({user}) =>
                         className="user-stripe-username"
                         variant="body1"
                         component="span"
-                        sx={{
-                            fontSize: '1.6rem',
-                        }}
                     >
                         {user.username}
                     </Typography>

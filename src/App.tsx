@@ -5,7 +5,6 @@ import {
 import 'react-toastify/dist/ReactToastify.css';
 import '@/styles/fonts/fonts.css';
 import '@/styles/app.css';
-import '@/styles/tags.css';
 import {
   CssBaseline,
   ThemeProvider,
