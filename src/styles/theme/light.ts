@@ -366,6 +366,27 @@ theme = createTheme(theme,{
                 },
             },
         },
+        MuiChip: {
+            styleOverrides: {
+                root: {
+                  "& .MuiChip-label::before": {
+                    content: '"#"',
+                  },
+                  "&.MuiChip-filled": {
+                    background: theme.palette.secondary.background,
+                    color: theme.palette.primary.main,
+                    borderRadius: '4px',
+                    boxShadow: `rgba(0, 0, 0, 0.2) 0px 0px 0px 1px;`,
+                  },
+                  "& .MuiChip-deleteIcon": {
+                    color: colorPrimary[300],
+                  },
+                  "& .MuiChip-deleteIcon:hover": {
+                    color: colorSecondary[300],
+                  },
+                },
+            },
+        },
     },
 })
 
