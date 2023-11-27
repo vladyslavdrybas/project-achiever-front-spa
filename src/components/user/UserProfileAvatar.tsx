@@ -1,15 +1,10 @@
 import React from "react";
-import {Avatar} from "@mui/material";
+import {
+  Avatar,
+} from "@mui/material";
 import colorFromUsername from "@/util/ColorFromUsername";
 import {avatar} from "@/artifacts/faked";
-import {TProfileResponse} from "@/api/types";
-import {IAuthUser} from "@/security/auth";
-
-interface UserProfileAvatarProps {
-  profile: TProfileResponse | IAuthUser | null;
-  cls: string;
-  alt?: string;
-}
+import {UserProfileAvatarProps} from "@/components/user/types";
 
 const UserProfileAvatar: React.FunctionComponent<UserProfileAvatarProps> = ({profile, cls}) => {
   const profileAvatar: string = profile?.avatar ?? avatar() ?? null;

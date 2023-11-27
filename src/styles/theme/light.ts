@@ -43,7 +43,7 @@ const typographyOptions: TypographyOptions = {
         fontFamily: 'greycliff-demibold'
     },
     h6: {
-        fontSize: '1.2rem',
+        fontSize: '1rem',
         fontFamily: 'greycliff-medium'
     },
     body1: {

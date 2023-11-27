@@ -5,7 +5,7 @@ import {
     Typography,
 } from "@mui/material";
 import {TProfileResponse} from "@/api/types";
-import UserProfileAvatar from "@/components/UserProfileAvatar";
+import UserProfileAvatar from "@/components/user/UserProfileAvatar";
 
 interface ProfileShortBlockViewProps {
     profile: TProfileResponse | null;

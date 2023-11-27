@@ -1,4 +1,4 @@
-import {createBrowserRouter, Navigate, redirect, useParams} from "react-router-dom";
+import {createBrowserRouter, Navigate, redirect} from "react-router-dom";
 import RootErrorBoundary from "@/RootErrorBoundary";
 import React from "react";
 import {ApiAuthProvider} from "@/security/auth";
@@ -9,7 +9,6 @@ import SignUpPage from "@/pages/auth/SignUpPage";
 import AnnLayout from "@/layouts/AnnLayout";
 import ProfileShortUserView from "@/components/an/ProfileShortUserView";
 import ProfileRequest from "@/api/requests/ProfileRequest";
-import PostsCollection from "@/components/post/PostsCollection";
 import {toast} from "react-toastify";
 import PostsCollectionRequest from "@/api/requests/PostsCollectionRequest";
 import ProfileUserListsView from "@/components/an/ProfileUserListsView";
@@ -17,7 +16,7 @@ import {profileFollowed, profileFollowers, profileGroups, profileLists} from "@/
 import ProfileUserGroupsView from "@/components/an/ProfileUserGroupsView";
 import ProfileUserFollowersView from "@/components/an/ProfileUserFollowersView";
 import ProfileUserFollowedView from "@/components/an/ProfileUserFollowedView";
-import AchievementAddBlock from "@/components/post/AchievementAddBlock";
+import UserAchievementsPage from "@/pages/ann/UserAchievementsPage";
 
 const AppRouter = createBrowserRouter([
     {
@@ -89,6 +88,7 @@ const AppRouter = createBrowserRouter([
                     }
 
                     return {
+                        profile: profile,
                         leftBlocks: [
                           <ProfileShortUserView profile={profile}/>,
                           <ProfileUserListsView profile={profile} lists={profileLists}/>,
@@ -96,9 +96,7 @@ const AppRouter = createBrowserRouter([
                           <ProfileUserFollowersView profile={profile} followers={profileFollowers}/>,
                           <ProfileUserFollowedView profile={profile} followed={profileFollowed}/>,
                         ],
-                        middleBlocks: [
-                          <AchievementAddBlock user={profile} />,
-                        ],
+                        middleBlocks: [],
                     }
                 },
                 Component: AnnLayout,
@@ -131,7 +129,7 @@ const AppRouter = createBrowserRouter([
                                 limit: 5,
                             };
                         },
-                        Component: PostsCollection,
+                        Component: UserAchievementsPage,
                     }
                 ]
             },

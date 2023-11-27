@@ -15,7 +15,7 @@ import SignInIcon from '@mui/icons-material/Login'
 import {IAuthUser} from "@/security/auth";
 import {Link as ReactLink, useNavigate} from "react-router-dom";
 import colorFromUsername from "@/util/ColorFromUsername";
-import UserProfileAvatar from "@/components/UserProfileAvatar";
+import UserProfileAvatar from "@/components/user/UserProfileAvatar";
 
 const pages: any[] = [
     {

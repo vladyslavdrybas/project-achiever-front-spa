@@ -1,15 +1,12 @@
 import {
-    Avatar,
     Box,
     Button,
-    Typography,
 } from "@mui/material";
-import colorFromUsername from "@/util/ColorFromUsername";
 import React from "react";
 import {Link as RouterLink, useRouteLoaderData} from "react-router-dom";
 import Link from "@mui/material/Link";
 import {IAuthUser} from "@/security/auth";
-import UserProfileAvatar from "@/components/UserProfileAvatar";
+import UserProfileAvatarLink from "@/components/user/UserProfileAvatarLink";
 
 interface UserInfoStripeProps {
     user: any;
@@ -30,42 +27,20 @@ const UserInfoStripe: React.FunctionComponent<UserInfoStripeProps> = ({user}) =>
                 alignContent: 'center',
             }}
         >
-          <UserProfileAvatar profile={user} cls="user-stripe-avatar"/>
-            {/*<Avatar*/}
-            {/*    className="user-stripe-avatar"*/}
-            {/*    sx={{*/}
-            {/*        backgroundColor: colorFromUsername(user.username),*/}
-            {/*    }}*/}
-            {/*>*/}
-            {/*    { user.firstname ? user.firstname[0].toUpperCase() : '' }*/}
-            {/*    { user.lastname ? user.lastname[0].toUpperCase() : '' }*/}
-            {/*    { !user.lastname && !user.firstname ? user.username[0].toUpperCase() : '' }*/}
-            {/*</Avatar>*/}
+          <UserProfileAvatarLink profile={user} cls="user-stripe-avatar"/>
 
             <Link
                 className="user-stripe-link router-link"
                 component={RouterLink}
                 to={`/ann/${user.username}`}
             >
-                {(user.firstname || user.lastname) && (
-                    <Typography
-                        className="user-stripe-username"
-                        variant="body1"
-                        component="span"
-                    >
-                        {user.firstname} {user.lastname}
-                    </Typography>
-                )}
-
-                {!user.firstname && !user.lastname && (
-                    <Typography
-                        className="user-stripe-username"
-                        variant="body1"
-                        component="span"
-                    >
-                        {user.username}
-                    </Typography>
-                )}
+              {!user.firstname && !user.lastname ?
+                (
+                  <>{user.username}</>
+                ) : (
+                  <>{user.firstname} {user.lastname}</>
+                )
+              }
             </Link>
 
             {authUser?.id !== user.id && (
