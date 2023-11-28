@@ -4,7 +4,7 @@ import {
   Button,
   Paper,
 } from "@mui/material";
-import AchievementAddForm from "@/components/an/action/AchievementAddForm";
+import AchievementAddForm from "@/components/ann/action/AchievementAddForm";
 import UserProfileAvatarLink from "@/components/user/UserProfileAvatarLink";
 
 interface ActionsBlockProps {

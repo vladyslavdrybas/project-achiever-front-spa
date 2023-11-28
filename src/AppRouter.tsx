@@ -7,15 +7,15 @@ import HomePage from "@/pages/HomePage";
 import SignInPage from "@/pages/auth/SignInPage";
 import SignUpPage from "@/pages/auth/SignUpPage";
 import AnnLayout from "@/layouts/AnnLayout";
-import ProfileShortUserView from "@/components/an/ProfileShortUserView";
+import ProfileShortUserView from "@/components/ann/ProfileShortUserView";
 import ProfileRequest from "@/api/requests/ProfileRequest";
 import {toast} from "react-toastify";
 import PostsCollectionRequest from "@/api/requests/PostsCollectionRequest";
-import ProfileUserListsView from "@/components/an/ProfileUserListsView";
+import ProfileUserListsView from "@/components/ann/ProfileUserListsView";
 import {profileFollowed, profileFollowers, profileGroups, profileLists} from "@/artifacts/faked";
-import ProfileUserGroupsView from "@/components/an/ProfileUserGroupsView";
-import ProfileUserFollowersView from "@/components/an/ProfileUserFollowersView";
-import ProfileUserFollowedView from "@/components/an/ProfileUserFollowedView";
+import ProfileUserGroupsView from "@/components/ann/ProfileUserGroupsView";
+import ProfileUserFollowersView from "@/components/ann/ProfileUserFollowersView";
+import ProfileUserFollowedView from "@/components/ann/ProfileUserFollowedView";
 import UserAchievementsPage from "@/pages/ann/UserAchievementsPage";
 
 const AppRouter = createBrowserRouter([

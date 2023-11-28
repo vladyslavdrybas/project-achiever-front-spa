@@ -1,5 +1,5 @@
 import React from "react";
-import ActionsBlock from "@/components/an/action/ActionsBlock";
+import ActionsBlock from "@/components/ann/action/ActionsBlock";
 import {useRouteLoaderData} from "react-router-dom";
 import {TPostsCollection, TProfileResponse} from "@/api/types";
 import PostView from "@/components/post/PostView";
