@@ -108,12 +108,6 @@ let theme = createTheme(options);
 
 theme = createTheme(theme,{
     components: {
-        MuiBox: {
-            styleOverrides: {
-                root: {
-                },
-            },
-        },
         MuiTypography: {
             styleOverrides: {
                 root: {
