@@ -66,7 +66,7 @@ const AppRouter = createBrowserRouter([
             },
             {
                 id: "ann-user",
-                path: "ann/",
+                path: "ann/:username",
                 async loader({params}) {
                     console.log('Ann loader params', params);
 
@@ -103,7 +103,7 @@ const AppRouter = createBrowserRouter([
                 children: [
                     {
                         id: "ann-user-posts-collection",
-                        path: ":username",
+                        path: "",
                         async loader({params}) {
                             if (!params.username) {
                                 toast.error('Not Found');
