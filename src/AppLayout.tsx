@@ -4,7 +4,7 @@ import {
     Avatar,
     Box,
     Container,
-    Typography, useTheme,
+    Typography,
 } from "@mui/material";
 import {Link as ReactLink, Outlet, useNavigation, useRouteLoaderData} from "react-router-dom";
 import {IAuthUser} from "@/security/auth";
