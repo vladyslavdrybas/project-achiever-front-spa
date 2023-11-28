@@ -111,8 +111,11 @@ const AppRouter = createBrowserRouter([
                                 // throw new Response('Not Found', {status:404});
                             }
 
+                            const limit = 17;
+                            const offset = 0;
+
                             console.log('ann-user-posts-collection', params)
-                            const apiRequest = new PostsCollectionRequest(params.username, 0, 17);
+                            const apiRequest = new PostsCollectionRequest(params.username, offset, limit);
                             let collection = [];
                             try {
                                 await apiRequest.send();
@@ -125,8 +128,8 @@ const AppRouter = createBrowserRouter([
 
                             return {
                                 posts: collection,
-                                offset: 0,
-                                limit: 5,
+                                offset: offset,
+                                limit: limit,
                             };
                         },
                         Component: UserAchievementsPage,

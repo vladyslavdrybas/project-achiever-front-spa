@@ -29,7 +29,12 @@ const MenuProps = {
   },
 };
 
-const AchievementAddForm: React.FunctionComponent = () => {
+interface AchievementForm {
+  posts: any;
+  postChanger(posts: any, newPostId: string): void;
+}
+
+const AchievementAddForm: React.FunctionComponent<AchievementForm> = ({posts, postChanger}) => {
   const lists: Record<string,string> = {};
   const groups: Record<string,string> = {};
   profileLists.forEach((i) => lists[i.id] = i.title)
@@ -74,6 +79,17 @@ const AchievementAddForm: React.FunctionComponent = () => {
     setIsPermissionGroups(false);
     setStartAt(null);
     setCompleteAt(null);
+
+    console.log(posts);
+    const l = posts.pop();
+    l.data.title = 'BlaBla';
+    l.id = 'some id';
+    l.data.id = 'another id';
+
+    posts.unshift(l);
+    console.log(posts);
+
+    postChanger(posts, l.id);
   }
 
   const handleSelectGroupChange = (event: SelectChangeEvent<typeof permissionSelectedGroups>) => {
@@ -191,7 +207,7 @@ const AchievementAddForm: React.FunctionComponent = () => {
         }
         renderTags={(value, props) =>
           value.map((option, index) => (
-            <Chip label={option} {...props({ index })} />
+            <Chip variant="tag" color="secondary" label={option} {...props({ index })} />
           ))
         }
         renderInput={(params) => <TextField
@@ -303,7 +319,7 @@ const AchievementAddForm: React.FunctionComponent = () => {
               <>
               <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                 {selected.map((value:string) => (
-                  <Chip key={value} label={groups[value]} />
+                  <Chip variant="filled" color="secondary" key={value} label={groups[value]} />
                 ))}
               </Box>
               </>

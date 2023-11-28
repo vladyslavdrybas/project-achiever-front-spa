@@ -25,6 +25,13 @@ declare module '@mui/material/styles' {
     }
 }
 
+declare module '@mui/material/Chip' {
+  interface ChipPropsVariantOverrides {
+    tag: true;
+    new: true;
+  }
+}
+
 const typographyOptions: TypographyOptions = {
     h1: {
         fontSize: '5rem',
@@ -368,23 +375,38 @@ theme = createTheme(theme,{
         },
         MuiChip: {
             styleOverrides: {
-                root: {
-                  "& .MuiChip-label::before": {
-                    content: '"#"',
-                  },
-                  "&.MuiChip-filled": {
-                    background: theme.palette.secondary.background,
-                    color: theme.palette.primary.main,
-                    borderRadius: '4px',
-                    boxShadow: `rgba(0, 0, 0, 0.2) 0px 0px 0px 1px;`,
-                  },
-                  "& .MuiChip-deleteIcon": {
-                    color: colorPrimary[300],
-                  },
-                  "& .MuiChip-deleteIcon:hover": {
-                    color: colorSecondary[300],
-                  },
+              root: {
+                borderRadius: '4px',
+                boxShadow: `rgba(0, 0, 0, 0.2) 0px 0px 0px 1px;`,
+                "&.MuiChip-tag .MuiChip-label::before": {
+                  content: '"#"',
                 },
+                "&.MuiChip-new": {
+                  height: 'auto',
+                  fontSize: '0.55rem',
+                  marginLeft: '3px',
+                },
+                "&.MuiChip-new .MuiChip-label": {
+                  padding: '3px',
+                  lineHeight: 1,
+                  fontSize: '0.55rem',
+                  fontFamily: 'greycliff-bold',
+                }
+              },
+              colorSuccess: {
+                background: theme.palette.success.main,
+                color: common.white,
+              },
+              colorSecondary: {
+                background: theme.palette.secondary.background,
+                color: theme.palette.primary.main,
+              },
+              "&.MuiChip-colorSecondary .MuiChip-deleteIcon": {
+                color: colorPrimary[200],
+              },
+              "&.MuiChip-colorSecondary .MuiChip-deleteIcon:hover": {
+                color: colorPrimary[900],
+              },
             },
         },
         MuiFormLabel: {

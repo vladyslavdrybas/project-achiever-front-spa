@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import ActionsBlock from "@/components/ann/action/ActionsBlock";
 import {useRouteLoaderData} from "react-router-dom";
 import {TPostsCollection, TProfileResponse} from "@/api/types";
@@ -8,12 +8,25 @@ import {Box} from "@mui/material";
 
 const UserAchievementsPage: React.FunctionComponent = () => {
   const { profile } = useRouteLoaderData('ann-user') as { profile: TProfileResponse };
-  const { posts } = useRouteLoaderData('ann-user-posts-collection') as { posts: TPostsCollection };
+  const { posts:loaderPosts } = useRouteLoaderData('ann-user-posts-collection') as { posts: TPostsCollection };
+
+  const [posts, setPosts] = useState<any>(loaderPosts);
+  const [newPostId, setNewPostId] = useState<string|null>(null);
   console.log('UserAchievementsPage', posts);
+
+  const postChanger = (posts: any, newPostId: string) => {
+    setPosts(posts);
+    setNewPostId(newPostId);
+  }
 
   return (
     <>
-      <ActionsBlock types={['achievements']} profile={profile} />
+      <ActionsBlock
+        types={['achievements']}
+        profile={profile}
+        posts={posts}
+        postChanger={postChanger}
+      />
       <Masonry
         columns={{xs:1, md:2}}
         spacing={0}
@@ -25,7 +38,7 @@ const UserAchievementsPage: React.FunctionComponent = () => {
         }}
       >
         {
-          posts.map((p,i) => (
+          posts.map((p: any, i: number) => (
             <Box
               className={i % 2 === 0 ? 'even' : 'odd'}
               key={`masonry-item--post-${p.id}`}

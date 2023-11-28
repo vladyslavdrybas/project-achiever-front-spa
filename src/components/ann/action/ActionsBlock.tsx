@@ -10,6 +10,8 @@ import UserProfileAvatarLink from "@/components/user/UserProfileAvatarLink";
 interface ActionsBlockProps {
   types: string[];
   profile: any;
+  posts: any;
+  postChanger(posts:any, newPostId: string): void;
 }
 
 interface ICreatingState {
@@ -58,7 +60,13 @@ const creatingStateDefault: ICreatingState = {
   }
 }
 
-const ActionsBlock: React.FunctionComponent<ActionsBlockProps> = ({types, profile}) => {
+const ActionsBlock: React.FunctionComponent<ActionsBlockProps> = ({
+  types,
+  profile,
+  posts,
+  postChanger,
+}) => {
+
   const [creatingState, setCreatingState] = useState<ICreatingState>(creatingStateDefault);
   const [isCreating, setIsCreating] = useState<boolean>(creatingStateDefault.isCreating());
 
@@ -106,7 +114,10 @@ const ActionsBlock: React.FunctionComponent<ActionsBlockProps> = ({types, profil
           sx={{pt: 2}}
         >
           {creatingState.isCreatingType('achievement') && (
-            <AchievementAddForm />
+            <AchievementAddForm
+              posts={posts}
+              postChanger={postChanger}
+            />
           )}
 
           <Box
