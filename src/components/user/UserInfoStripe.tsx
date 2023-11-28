@@ -20,11 +20,11 @@ const UserInfoStripe: React.FunctionComponent<UserInfoStripeProps> = ({user}) =>
         <Box
             className="user-stripe flex-row-start"
             sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-                alignItems: 'start',
-                alignContent: 'center',
+              display: 'flex',
+              flexDirection: 'row',
+              flexWrap: 'nowrap',
+              alignItems: 'center',
+              alignContent: 'flex-start',
             }}
         >
           <UserProfileAvatarLink profile={user} cls="user-stripe-avatar"/>

@@ -104,7 +104,7 @@ const AchievementAddForm: React.FunctionComponent = () => {
         label="Title"
         name="title"
         sx={{
-          mb: 1,
+          mb: 2,
           mt: 0,
         }}
       />
@@ -120,7 +120,7 @@ const AchievementAddForm: React.FunctionComponent = () => {
         multiline
         maxRows={20}
         sx={{
-          mb: 1,
+          mb: 2,
           mt: 0,
         }}
       />
@@ -135,7 +135,7 @@ const AchievementAddForm: React.FunctionComponent = () => {
         ampm={false}
         sx={{
           minWidth: "100%",
-          mb: 1,
+          mb: 2,
           mt: 0,
         }}
       />
@@ -150,7 +150,7 @@ const AchievementAddForm: React.FunctionComponent = () => {
         ampm={false}
         sx={{
           minWidth: "100%",
-          mb: 1,
+          mb: 2,
           mt: 0,
         }}
       />
@@ -220,10 +220,19 @@ const AchievementAddForm: React.FunctionComponent = () => {
             }}
           />
         }
-        sx={{mb: 1, mt: 0,}}
+        sx={{
+          mb: 2,
+          mt: 0,
+        }}
       />
 
-      <FormControl fullWidth sx={{mb: 1, mt: 0,}}>
+      <FormControl
+        fullWidth
+        sx={{
+          mb: 2,
+          mt: 0,
+        }}
+      >
         <InputLabel id={`${formId}-select-list-label`}>List</InputLabel>
         <Select
           className="form-add-select"
@@ -239,7 +248,13 @@ const AchievementAddForm: React.FunctionComponent = () => {
         </Select>
       </FormControl>
 
-      <FormControl fullWidth sx={{mb: 1, mt: 0,}}>
+      <FormControl
+        fullWidth
+        sx={{
+          mb: 2,
+          mt: 0,
+        }}
+      >
         <InputLabel id={`${formId}-select-whocansee-label`}>Who can see</InputLabel>
         <Select
           className="form-add-select"
@@ -267,7 +282,13 @@ const AchievementAddForm: React.FunctionComponent = () => {
       </FormControl>
 
       {isPermissionGroups && (
-        <FormControl fullWidth sx={{mb: 1, mt: 0,}}>
+        <FormControl
+          fullWidth
+          sx={{
+            mb: 2,
+            mt: 0,
+          }}
+        >
           <InputLabel id={`${formId}-select-groups-label`}>Groups</InputLabel>
           <Select
             className="form-add-select"

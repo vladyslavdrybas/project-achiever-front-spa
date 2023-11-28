@@ -127,7 +127,7 @@ theme = createTheme(theme,{
                     '&.user-stripe-link, &.router-link': {
                         color: theme.palette.primary.main,
                         textDecoration: 'none',
-                        fontSize: '1rem',
+                        fontSize: '0.89rem',
                         fontFamily: 'greycliff-demibold',
                     },
                     '&.list-title-link': {
@@ -268,12 +268,12 @@ theme = createTheme(theme,{
                 root: {
                     fontFamily: 'greycliff-demibold',
                     color: theme.palette.primary.main,
-                    '&:hover': {
-                        color: common.white,
-                    },
-                    '.share-buttons &:hover': {
-                        color: theme.palette.primary.main,
-                    },
+                    // '&:hover': {
+                    //     color: common.white,
+                    // },
+                    // '.share-buttons &:hover': {
+                    //     color: theme.palette.primary.main,
+                    // },
                     '.MuiTableCell-body .MuiLink-root &:hover': {
                         color: theme.palette.secondary.background,
                     },
@@ -384,6 +384,14 @@ theme = createTheme(theme,{
                   "& .MuiChip-deleteIcon:hover": {
                     color: colorSecondary[300],
                   },
+                },
+            },
+        },
+        MuiFormLabel: {
+            styleOverrides: {
+                root: {
+                  padding: '0 8px',
+                  background: common.white,
                 },
             },
         },

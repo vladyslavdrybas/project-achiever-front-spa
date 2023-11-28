@@ -16,11 +16,23 @@ const ProfileUserListsView: React.FunctionComponent<ProfileUserListsViewProps> =
     <Paper
       sx={{
         display: "flex",
-        flexDirection: "column",
-        flexWrap: "nowrap",
-        justifyContent: "center",
-        alignItems: "start",
-        alignContent: "center",
+        flexDirection: {
+          xs: 'row',
+          md: "column"
+        },
+        flexWrap: "wrap",
+        justifyContent: {
+          xs: 'flex-start',
+          md: "center"
+        },
+        alignItems: {
+          xs: "center",
+          md: "flex-start",
+        },
+        alignContent: {
+          xs: "center",
+          md: "flex-start",
+        },
         p: 1,
         mb: 1,
       }}
@@ -30,11 +42,35 @@ const ProfileUserListsView: React.FunctionComponent<ProfileUserListsViewProps> =
         component={RouterLink}
         to={`/ann/${profile.username}/lists`}
         sx={{
-          mb: 1,
+          mt: {
+            xs: '0.5rem',
+            md: 0,
+          },
+          mb: {
+            xs: 0,
+            md: 1,
+          },
+          mr: {
+            xs: 1,
+            md: 0,
+          },
+          '&::after': {
+            xs: {
+              content: '":"',
+              paddingLeft: '2px',
+              marginRight: '8px',
+            },
+            md: {
+              content: '""',
+              paddingLeft: 0,
+              marginRight: 0,
+            },
+          },
         }}
       >
         Lists
       </Link>
+
       {lists.map((l:any) => (
         <Link
           className="list-item-link router-link"
@@ -42,6 +78,27 @@ const ProfileUserListsView: React.FunctionComponent<ProfileUserListsViewProps> =
           to={`/list/${l.id}`}
           sx={{
             mt: '0.5rem',
+            mr: {
+              xs: 1,
+              md: 0,
+            },
+            '&:last-child::after': {
+              content: '""',
+              paddingLeft: 0,
+              paddingRight: 0,
+            },
+            '&::after': {
+              xs: {
+                content: '"|"',
+                paddingLeft: '4px',
+                marginRight: '4px',
+              },
+              md: {
+                content: '""',
+                paddingLeft: 0,
+                marginRight: 0,
+              },
+            },
           }}
         >
           {l.title}

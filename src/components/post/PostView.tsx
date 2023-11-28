@@ -28,7 +28,7 @@ const PostView: React.FunctionComponent<PostViewProps> = ({post}) => {
     <Paper
         className={`post post-${post.id} post-${post.type} post-${post.data.object.toLowerCase()}`}
         sx={{
-            mb: 1,
+            // mb: 1,
             p: 1,
             display: "flex",
             flexDirection: "column",
@@ -48,7 +48,7 @@ const PostView: React.FunctionComponent<PostViewProps> = ({post}) => {
         {post.data.title}
       </Typography>
 
-      <PostThumbnail post={post}/>
+      {/*<PostThumbnail post={post}/>*/}
 
       {renderPostContent(post)}
 

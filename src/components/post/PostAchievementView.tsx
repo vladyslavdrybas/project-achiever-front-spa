@@ -20,6 +20,7 @@ const PostAchievementView: React.FunctionComponent<PostAchievementProps> = ({ach
             }}
         >
             <CardHeader
+                component={"div"}
                 className="post-header"
                 subheader={
                     <Box
@@ -27,9 +28,9 @@ const PostAchievementView: React.FunctionComponent<PostAchievementProps> = ({ach
                         sx={{
                           display: 'flex',
                           flexDirection: 'row',
-                          flexWrap: 'wrap',
-                          alignItems: 'start',
-                          alignContent: 'center',
+                          flexWrap: 'nowrap',
+                          alignItems: 'center',
+                          alignContent: 'flex-start',
                         }}
                     >
                       <Typography

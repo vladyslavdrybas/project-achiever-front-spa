@@ -18,11 +18,23 @@ const ProfileUserFollowedView: React.FunctionComponent<ProfileUserListsViewProps
     <Paper
       sx={{
         display: "flex",
-        flexDirection: "column",
-        flexWrap: "nowrap",
-        justifyContent: "center",
-        alignItems: "start",
-        alignContent: "center",
+        flexDirection: {
+          xs: 'row',
+          md: "column"
+        },
+        flexWrap: "wrap",
+        justifyContent: {
+          xs: 'flex-start',
+          md: "center"
+        },
+        alignItems: {
+          xs: "center",
+          md: "start",
+        },
+        alignContent: {
+          xs: "center",
+          md: "flex-start",
+        },
         p: 1,
         mb: 1,
       }}
@@ -32,7 +44,26 @@ const ProfileUserFollowedView: React.FunctionComponent<ProfileUserListsViewProps
         component={RouterLink}
         to={`/ann/${profile.username}/followed`}
         sx={{
-          mb: 1,
+          mb: {
+            xs: 0,
+            md: 1,
+          },
+          mr: {
+            xs: 1,
+            md: 0,
+          },
+          '&::after': {
+            xs: {
+              content: '":"',
+              paddingLeft: '2px',
+              marginRight: '8px',
+            },
+            md: {
+              content: '""',
+              paddingLeft: 0,
+              marginRight: 0,
+            },
+          },
         }}
       >
         Followed
@@ -44,9 +75,17 @@ const ProfileUserFollowedView: React.FunctionComponent<ProfileUserListsViewProps
             display: 'flex',
             flexDirection: 'row',
             flexWrap: 'wrap',
+            justifyContent: 'center',
             alignItems: 'start',
             alignContent: 'center',
-            mt: 1,
+            mt: {
+              xs: 0,
+              md: '0.5rem',
+            },
+            mr: {
+              xs: 1,
+              md: 0,
+            },
           }}
         >
           <Avatar

@@ -112,7 +112,7 @@ const AppRouter = createBrowserRouter([
                             }
 
                             console.log('ann-user-posts-collection', params)
-                            const apiRequest = new PostsCollectionRequest(params.username, 0, 5);
+                            const apiRequest = new PostsCollectionRequest(params.username, 0, 17);
                             let collection = [];
                             try {
                                 await apiRequest.send();
