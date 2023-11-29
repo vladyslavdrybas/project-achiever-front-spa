@@ -141,7 +141,12 @@ const ActionsBlock: React.FunctionComponent<ActionsBlockProps> = ({
 
       {isCreating && (
         <Box
-          sx={{pt: 2}}
+          sx={{
+            pt: 2,
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
         >
           {creatingState.isCreatingType('achievement') && (
             <AchievementAddForm
