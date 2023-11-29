@@ -12,7 +12,7 @@ interface ActionsBlockProps {
   types: string[];
   profile: any;
   posts: any;
-  postChanger(posts:any, newPostId: string): void;
+  postChanger: any;
 }
 
 interface ICreatingState {

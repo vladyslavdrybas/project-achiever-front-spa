@@ -145,9 +145,16 @@ const AppRouter = createBrowserRouter([
 
                             const offset = config.api.load.offset;
                             const limit = config.api.load.limit;
+                            const lastPostTimestamp = Math.floor((new Date()).getTime()/1000);
 
                             console.log('ann-user-achievements-collection', params);
-                            const apiRequest = new PostsCollectionRequest(params.username, offset, limit);
+                            const apiRequest = new PostsCollectionRequest(
+                              params.username,
+                              lastPostTimestamp,
+                              offset,
+                              limit,
+                              config.api.load.timerange.older
+                            );
                             let collection = [];
                             try {
                                 await apiRequest.send();
@@ -161,8 +168,6 @@ const AppRouter = createBrowserRouter([
                             console.log('ann-user-achievements-collection', collection);
                             return {
                                 posts: collection,
-                                offset: offset,
-                                limit: limit,
                             };
                         },
                         Component: UserAchievementsPage,
@@ -179,17 +184,29 @@ const AppRouter = createBrowserRouter([
 
                             const offset = config.api.load.offset;
                             const limit = config.api.load.limit;
+                            const lastPostTimestamp = Math.floor((new Date()).getTime()/1000);
 
                             console.log('ann-user-lists-collection', params);
-                            const listOwnedRequest = new AchievementListOwnedRequest(params.username, offset, limit);
-                            const listSharedRequest = new AchievementListSharedRequest(params.username, offset, limit);
+                            const listOwnedRequest = new AchievementListOwnedRequest(
+                              params.username,
+                              lastPostTimestamp,
+                              offset,
+                              limit,
+                              config.api.load.timerange.older
+                            );
+                            // const listSharedRequest = new AchievementListSharedRequest(
+                            //   params.username,
+                            //   lastPostTimestamp,
+                            //   offset,
+                            //   limit
+                            // );
 
                             let collection = [];
                             try {
                                 await listOwnedRequest.send();
-                                await listSharedRequest.send();
+                                // await listSharedRequest.send();
                                 collection = listOwnedRequest.response;
-                                collection = collection.concat(listSharedRequest.response);
+                                // collection = collection.concat(listSharedRequest.response);
                             } catch (e: any) {
                                 toast.error(e.message);
                                 return {leftBlocks:[]};
@@ -199,8 +216,6 @@ const AppRouter = createBrowserRouter([
                             console.log('ann-user-lists-collection', collection);
                             return {
                                 posts: collection,
-                                offset: offset,
-                                limit: limit,
                             };
                         },
                         Component: UserListsPage,

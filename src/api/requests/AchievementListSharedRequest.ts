@@ -9,15 +9,19 @@ class AchievementListOwnedRequest {
 
   constructor(
     username: string,
+    timestamp: number,
     offset: number,
-    limit: number
+    limit: number,
+    variant: string
   ) {
     this._route = apiRoute(
       'achievementListShared',
       {
         'user': username,
+        'timestamp': timestamp.toString(),
         'offset': offset.toString(),
         'limit': limit.toString(),
+        'variant': variant,
       }
     );
   }

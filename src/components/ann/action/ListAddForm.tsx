@@ -32,7 +32,7 @@ const MenuProps = {
 
 interface AddPostForm {
   posts: any;
-  postChanger(posts: any, newPostId: string): void;
+  postChanger: any;
 }
 
 const ListAddForm: React.FunctionComponent<AddPostForm> = ({posts, postChanger}) => {
@@ -78,7 +78,7 @@ const ListAddForm: React.FunctionComponent<AddPostForm> = ({posts, postChanger})
     posts.unshift(l);
     console.log(posts);
 
-    postChanger(posts, l.id);
+    postChanger(posts);
   }
 
   const handleSelectGroupChange = (event: SelectChangeEvent<typeof permissionSelectedGroups>) => {

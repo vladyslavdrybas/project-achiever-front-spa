@@ -7,9 +7,9 @@ const _pool: Record<string, string> = {
   register: '/auth/register',
   logout: '/auth/logout',
   accessTokenRefresh: '/auth/token/refresh',
-  achievementListOwned: '/achievement/list/[user]/own/[offset]/[limit]',
-  achievementListShared: '/achievement/list/[user]/share/[offset]/[limit]',
-  postsCollection: '/post/[user]/[offset]/[limit]',
+  achievementListOwned: '/achievement/list/[user]/own/[timestamp]/[offset]/[limit]/[variant]',
+  achievementListShared: '/achievement/list/[user]/share/[timestamp]/[offset]/[limit]/[variant]',
+  postsCollection: '/post/[user]/[timestamp]/[offset]/[limit]/[variant]',
   userProfile: '/user/[userId]',
   userInfoView: '/user/[userId]/info',
 

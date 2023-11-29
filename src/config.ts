@@ -16,7 +16,11 @@ export const config = {
   api: {
     load: {
       offset: 0,
-      limit: 7,
+      limit: 3,
+      timerange: {
+        older: 'older',
+        newer: 'newer',
+      }
     },
   }
 };
