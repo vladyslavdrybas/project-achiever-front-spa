@@ -20,6 +20,7 @@ import UserAchievementsPage from "@/pages/ann/UserAchievementsPage";
 import AchievementListOwnedRequest from "@/api/requests/AchievementListOwnedRequest";
 import AchievementListSharedRequest from "@/api/requests/AchievementListSharedRequest";
 import UserListsPage from "@/pages/ann/UserListsPage";
+import StaticInfoBlock from "@/components/StaticInfoBlock";
 
 const AppRouter = createBrowserRouter([
     {
@@ -98,7 +99,9 @@ const AppRouter = createBrowserRouter([
                           <ProfileUserGroupsView profile={profile} groups={profileGroups}/>,
                         ],
                         middleBlocks: [],
-                        rightBlocks: [],
+                        rightBlocks: [
+                          <StaticInfoBlock />,
+                        ],
                         semiBlocks: [
                           <ProfileUserFollowersView profile={profile} followers={profileFollowers} />,
                           <ProfileUserFollowedView profile={profile} followed={profileFollowed} />,

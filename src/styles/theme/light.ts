@@ -118,7 +118,11 @@ theme = createTheme(theme,{
                     '&.post-tag, &.date': {
                         fontSize: '0.8rem',
                     },
-
+                    '&.static-info-link-text': {
+                        fontSize: '0.8rem',
+                        color: colorPrimary[700],
+                        fontFamily: 'greycliff-regular',
+                    },
                 },
             },
         },
@@ -136,6 +140,17 @@ theme = createTheme(theme,{
                     },
                     '&.list-item-link': {
                       textAlign: 'left',
+                    },
+                    '&.static-info-link-item.router-link': {
+                      marginBottom: '0.55rem',
+                      marginRight: '0.8rem',
+                    },
+                    '&.last': {
+                      marginRight: '0 !important',
+                      '&::last-child': {
+                        content: '"" !important',
+                        marginRight: '0 !important',
+                      }
                     },
                 },
             },
