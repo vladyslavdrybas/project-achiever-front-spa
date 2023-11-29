@@ -21,6 +21,9 @@ import AchievementListOwnedRequest from "@/api/requests/AchievementListOwnedRequ
 import AchievementListSharedRequest from "@/api/requests/AchievementListSharedRequest";
 import UserListsPage from "@/pages/ann/UserListsPage";
 import StaticInfoBlock from "@/components/StaticInfoBlock";
+import AboutPage from "@/pages/AboutPage";
+import HelpPage from "@/pages/HelpPage";
+import PrivacyAndTermsPage from "@/pages/PrivacyAndTermsPage";
 
 const AppRouter = createBrowserRouter([
     {
@@ -67,6 +70,18 @@ const AppRouter = createBrowserRouter([
                     return null;
                 },
                 Component: SignUpPage,
+            },
+            {
+                path: "about",
+                Component: AboutPage,
+            },
+            {
+                path: "help",
+                Component: HelpPage,
+            },
+            {
+                path: "privacyandterms",
+                Component: PrivacyAndTermsPage,
             },
             {
                 id: "ann-user",
