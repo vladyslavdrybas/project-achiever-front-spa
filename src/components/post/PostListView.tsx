@@ -51,7 +51,7 @@ const PostListView: React.FunctionComponent<PostListProps> = ({list}) => {
                 mr: {xs: 1, md: 2},
               }}
             >
-              achievements: {list.achievementsAmount}
+              achievements: {list.achievementsAmount > 0 ? list.achievementsAmount : 'none'}
             </Typography>
           </Box>
         }

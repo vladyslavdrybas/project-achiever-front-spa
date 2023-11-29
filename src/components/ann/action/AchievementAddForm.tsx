@@ -17,6 +17,7 @@ import {Dayjs} from "dayjs";
 import {DateTimePicker} from "@mui/x-date-pickers";
 import {profileGroups, profileLists} from "@/artifacts/faked";
 import {toast} from "react-toastify";
+import DateW3c from "@/util/DateW3c";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -83,8 +84,13 @@ const AchievementAddForm: React.FunctionComponent<AddPostForm> = ({posts, postCh
     const l = JSON.parse(JSON.stringify(posts[posts.length - 1]));
     l.data.title = title;
     l.data.description = description;
-    l.id = 'post-id-' + (new Date('now')).getTime();
-    l.data.id = 'another-list-id-' + (new Date('now')).getTime();
+    l.id = 'post-id-' + DateW3c.now();
+    l.data.id = 'another-list-id-' + DateW3c.now();
+    l.data.createdAt = new DateW3c();
+    l.data.updatedAt = new DateW3c();
+    l.createdAt = new DateW3c();
+    l.updatedAt = new DateW3c();
+    l.data.doneAt = new DateW3c();
 
     posts.unshift(l);
     console.log(posts);
