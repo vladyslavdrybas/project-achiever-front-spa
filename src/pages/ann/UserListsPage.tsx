@@ -1,16 +1,16 @@
 import React, {useState} from "react";
 import ActionsBlock from "@/components/ann/action/ActionsBlock";
 import {useRouteLoaderData} from "react-router-dom";
-import {TPostsCollection, TProfileResponse} from "@/api/types";
+import {TProfileResponse} from "@/api/types";
 import PostListCollection from "@/components/post/PostListCollection";
 
-const UserAchievementsPage: React.FunctionComponent = () => {
+const UserListsPage: React.FunctionComponent = () => {
   const { profile } = useRouteLoaderData('ann-user') as { profile: TProfileResponse };
-  const { posts:loaderPosts } = useRouteLoaderData('ann-user-achievements-collection') as { posts: TPostsCollection };
+  const { posts:loaderPosts } = useRouteLoaderData('ann-user-lists-collection') as { posts: any };
 
   const [posts, setPosts] = useState<any>(loaderPosts);
   const [newPostId, setNewPostId] = useState<string|null>(null);
-  console.log('UserAchievementsPage', posts);
+  console.log('UserListsPage', posts);
 
   const postChanger = (posts: any, newPostId: string) => {
     setPosts(posts);
@@ -20,7 +20,7 @@ const UserAchievementsPage: React.FunctionComponent = () => {
   return (
     <>
       <ActionsBlock
-        types={['achievement']}
+        types={['list']}
         profile={profile}
         posts={posts}
         postChanger={postChanger}
@@ -31,4 +31,4 @@ const UserAchievementsPage: React.FunctionComponent = () => {
   )
 }
 
-export default UserAchievementsPage;
+export default UserListsPage;

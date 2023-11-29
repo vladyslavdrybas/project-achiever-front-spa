@@ -34,6 +34,8 @@ class PostsCollectionRequest {
         this._response = request.response;
 
         this._response = this._response.map((item: any) => {
+            item.createdAt = new DateW3c(item.createdAt);
+            item.updatedAt = new DateW3c(item.updatedAt);
             item.data.doneAt = null !== item.data.doneAt ? new DateW3c(item.data.doneAt) : null;
             item.data.createdAt = new DateW3c(item.data.createdAt);
             item.data.updatedAt = new DateW3c(item.data.updatedAt);

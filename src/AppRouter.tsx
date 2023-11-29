@@ -17,6 +17,9 @@ import ProfileUserGroupsView from "@/components/ann/ProfileUserGroupsView";
 import ProfileUserFollowersView from "@/components/ann/ProfileUserFollowersView";
 import ProfileUserFollowedView from "@/components/ann/ProfileUserFollowedView";
 import UserAchievementsPage from "@/pages/ann/UserAchievementsPage";
+import AchievementListOwnedRequest from "@/api/requests/AchievementListOwnedRequest";
+import AchievementListSharedRequest from "@/api/requests/AchievementListSharedRequest";
+import UserListsPage from "@/pages/ann/UserListsPage";
 
 const AppRouter = createBrowserRouter([
     {
@@ -93,16 +96,19 @@ const AppRouter = createBrowserRouter([
                           <ProfileShortUserView profile={profile}/>,
                           <ProfileUserListsView profile={profile} lists={profileLists}/>,
                           <ProfileUserGroupsView profile={profile} groups={profileGroups}/>,
-                          <ProfileUserFollowersView profile={profile} followers={profileFollowers}/>,
-                          <ProfileUserFollowedView profile={profile} followed={profileFollowed}/>,
                         ],
                         middleBlocks: [],
+                        rightBlocks: [],
+                        semiBlocks: [
+                          <ProfileUserFollowersView profile={profile} followers={profileFollowers} />,
+                          <ProfileUserFollowedView profile={profile} followed={profileFollowed} />,
+                        ],
                     }
                 },
                 Component: AnnLayout,
                 children: [
                     {
-                        id: "ann-user-posts-collection",
+                        id: "ann-user-achievements-collection",
                         path: "",
                         async loader({params}) {
                             if (!params.username) {
@@ -114,7 +120,7 @@ const AppRouter = createBrowserRouter([
                             const limit = 17;
                             const offset = 0;
 
-                            console.log('ann-user-posts-collection', params)
+                            console.log('ann-user-achievements-collection', params);
                             const apiRequest = new PostsCollectionRequest(params.username, offset, limit);
                             let collection = [];
                             try {
@@ -126,6 +132,7 @@ const AppRouter = createBrowserRouter([
                                 // throw new Response(e.message, {status:400});
                             }
 
+                            console.log('ann-user-achievements-collection', collection);
                             return {
                                 posts: collection,
                                 offset: offset,
@@ -133,8 +140,46 @@ const AppRouter = createBrowserRouter([
                             };
                         },
                         Component: UserAchievementsPage,
-                    }
-                ]
+                    },
+                    {
+                        id: "ann-user-lists-collection",
+                        path: "lists",
+                        async loader({params}) {
+                            if (!params.username) {
+                                toast.error('Not Found');
+                                return {leftBlocks:[]};
+                                // throw new Response('Not Found', {status:404});
+                            }
+
+                            const offset = 0;
+                            const limit = 11;
+
+                            console.log('ann-user-lists-collection', params);
+                            const listOwnedRequest = new AchievementListOwnedRequest(params.username, offset, limit);
+                            const listSharedRequest = new AchievementListSharedRequest(params.username, offset, limit);
+
+                            let collection = [];
+                            try {
+                                await listOwnedRequest.send();
+                                await listSharedRequest.send();
+                                collection = listOwnedRequest.response;
+                                collection = collection.concat(listSharedRequest.response);
+                            } catch (e: any) {
+                                toast.error(e.message);
+                                return {leftBlocks:[]};
+                                // throw new Response(e.message, {status:400});
+                            }
+
+                            console.log('ann-user-lists-collection', collection);
+                            return {
+                                posts: collection,
+                                offset: offset,
+                                limit: limit,
+                            };
+                        },
+                        Component: UserListsPage,
+                    },
+                ],
             },
         ],
     },

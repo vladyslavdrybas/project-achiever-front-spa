@@ -11,6 +11,7 @@ import PostTabs from "@/components/post/PostTabs";
 // import PostThumbnail from "@/components/post/PostThumbnail";
 import DateW3c from "@/util/DateW3c";
 import {config} from "@/config";
+import PostListView from "@/components/post/PostListView";
 
 interface PostViewProps {
     post: TPostViewResponse;
@@ -20,9 +21,11 @@ const PostView: React.FunctionComponent<PostViewProps> = ({post}) => {
   console.log('PostView', post);
 
   const renderPostContent = (post: TPostViewResponse) => {
-      switch (post.data.object.toLowerCase()) {
+      switch (post.type.toLowerCase()) {
           case 'achievement':
               return <PostAchievementView achievement={post.data}/>;
+          case 'list':
+              return <PostListView list={post.data}/>;
           default:
               return <></>
       }

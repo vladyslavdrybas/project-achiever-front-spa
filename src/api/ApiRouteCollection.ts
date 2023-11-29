@@ -7,18 +7,19 @@ const _pool: Record<string, string> = {
   register: '/auth/register',
   logout: '/auth/logout',
   accessTokenRefresh: '/auth/token/refresh',
+  achievementListOwned: '/achievement/list/[user]/own/[offset]/[limit]',
+  achievementListShared: '/achievement/list/[user]/share/[offset]/[limit]',
+  postsCollection: '/post/[user]/[offset]/[limit]',
+  userProfile: '/user/[userId]',
+  userInfoView: '/user/[userId]/info',
+
   achievementListView: '/achievement/list/[listId]',
-  achievementListOwned: '/achievement/list/my/owned/[offset]/[limit]',
-  achievementListShared: '/achievement/list/my/shared/[offset]/[limit]',
   achievementsOfListView: '/achievement/list/[listId]/a/l/[offset]/[limit]',
   achievementView: '/achievement/list/[listId]/a/[achievementId]',
   achievementPrerequisitesView: '/achievement/prerequisite/tree/prerequisites/l/[listId]/a/[achievementId]',
   achievementPrerequisitesTree: '/achievement/prerequisite/tree/[achievementId]',
   userListPublic: '/user/list/public/[offset]/[limit]',
-  userProfile: '/user/[userId]',
-  userInfoView: '/user/[userId]/info',
   userProfilePasswordChange: '/user/[userId]/passwordchange',
-  postsCollection: '/post/[user]/[offset]/[limit]',
 };
 
 const apiRoute = function (routeName: string, params: Record<string, string> = {}) {

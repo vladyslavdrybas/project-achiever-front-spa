@@ -6,6 +6,7 @@ import {
 } from "@mui/material";
 import AchievementAddForm from "@/components/ann/action/AchievementAddForm";
 import UserProfileAvatarLink from "@/components/user/UserProfileAvatarLink";
+import ListAddForm from "@/components/ann/action/ListAddForm";
 
 interface ActionsBlockProps {
   types: string[];
@@ -16,8 +17,10 @@ interface ActionsBlockProps {
 
 interface ICreatingState {
   states: Record<string,boolean>;
+  types: Record<string,boolean>;
   isCreating(): boolean;
   isCreatingType(type:string): boolean;
+  addType(type:string): void;
   hasType(type:string): boolean;
   switchCreating(type:string): ICreatingState;
   close(): void;
@@ -25,6 +28,11 @@ interface ICreatingState {
 
 const creatingStateDefault: ICreatingState = {
   states: {
+    achievement: false,
+    list: false,
+    group: false,
+  },
+  types: {
     achievement: false,
     list: false,
     group: false,
@@ -51,7 +59,12 @@ const creatingStateDefault: ICreatingState = {
     return this;
   },
   hasType(type:string): boolean {
-    return typeof this.states[type] === 'boolean';
+    return typeof this.types[type] === 'boolean' && this.types[type];
+  },
+  addType(type:string): void {
+    if (typeof this.types[type] === 'boolean') {
+      this.types[type] = true;
+    }
   },
   close(): void {
     Object.keys(this.states).forEach(key => {
@@ -66,9 +79,14 @@ const ActionsBlock: React.FunctionComponent<ActionsBlockProps> = ({
   posts,
   postChanger,
 }) => {
+  types.forEach(t => {
+    creatingStateDefault.addType(t);
+  });
 
   const [creatingState, setCreatingState] = useState<ICreatingState>(creatingStateDefault);
   const [isCreating, setIsCreating] = useState<boolean>(creatingStateDefault.isCreating());
+
+  console.log(creatingState);
 
   return (
     <Paper
@@ -107,6 +125,18 @@ const ActionsBlock: React.FunctionComponent<ActionsBlockProps> = ({
             Add achievement
           </Button>
         )}
+
+        {creatingState.hasType('list') && !creatingState.isCreatingType('list') && (
+          <Button
+            onClick = {() => {
+                setCreatingState(creatingState.switchCreating('list'));
+                setIsCreating(creatingState.isCreating());
+              }
+            }
+          >
+            Add list
+          </Button>
+        )}
       </Box>
 
       {isCreating && (
@@ -115,6 +145,12 @@ const ActionsBlock: React.FunctionComponent<ActionsBlockProps> = ({
         >
           {creatingState.isCreatingType('achievement') && (
             <AchievementAddForm
+              posts={posts}
+              postChanger={postChanger}
+            />
+          )}
+          {creatingState.isCreatingType('list') && (
+            <ListAddForm
               posts={posts}
               postChanger={postChanger}
             />

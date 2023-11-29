@@ -34,19 +34,13 @@ interface AddPostForm {
   postChanger(posts: any, newPostId: string): void;
 }
 
-const AchievementAddForm: React.FunctionComponent<AddPostForm> = ({posts, postChanger}) => {
-  const lists: Record<string,string> = {};
+const ListAddForm: React.FunctionComponent<AddPostForm> = ({posts, postChanger}) => {
   const groups: Record<string,string> = {};
-  profileLists.forEach((i) => lists[i.id] = i.title)
   profileGroups.forEach((i) => groups[i.id] = i.title)
 
-  const maxHashes: number = 10;
-  const formId = 'achievement-add-form';
+  const formId = 'list-add-form';
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [completeAt, setCompleteAt] = useState<Dayjs | null>(null);
-  const [startAt, setStartAt] = useState<Dayjs | null>(null);
-  const [hashTags, setHashTags] = useState<string[]>([]);
   const [isPermissionGroups, setIsPermissionGroups] = useState<boolean>(false);
   const [permissionSelectedGroups, setPermissionSelectedGroups] = useState<string[]>([]);
 
@@ -59,26 +53,16 @@ const AchievementAddForm: React.FunctionComponent<AddPostForm> = ({posts, postCh
     const title = data.get('title')?.toString() ?? '';
     const description = data.get('description')?.toString() ?? '';
     const whocansee = data.get('whocansee')?.toString() ?? '';
-    const startDateTime = startAt?.format() ?? null;
-    const completeDateTime = completeAt?.format() ?? null;
-    const list = data.get('list')?.toString() ?? '';
 
     console.log([
       title,
       description,
-      startDateTime,
-      completeDateTime,
-      hashTags,
-      list,
       whocansee,
       permissionSelectedGroups,
     ]);
     setIsLoading(false);
-    setHashTags([]);
     setPermissionSelectedGroups([]);
     setIsPermissionGroups(false);
-    setStartAt(null);
-    setCompleteAt(null);
 
     const l = JSON.parse(JSON.stringify(posts[posts.length - 1]));
     l.data.title = title;
@@ -105,11 +89,11 @@ const AchievementAddForm: React.FunctionComponent<AddPostForm> = ({posts, postCh
   return (
     <Box
       id={formId}
-      className="form form-add achievement-form"
+      className="form form-add list-form"
       component="form"
       onSubmit={handleAddAchievement}
     >
-      <Typography variant={'h6'} component={'div'} sx={{pb:1}}>Add achievement</Typography>
+      <Typography variant={'h6'} component={'div'} sx={{pb:1}}>Add list</Typography>
       <TextField
         className="form-add-textfield"
         disabled={isLoading}
@@ -140,129 +124,6 @@ const AchievementAddForm: React.FunctionComponent<AddPostForm> = ({posts, postCh
           mt: 0,
         }}
       />
-      <DateTimePicker
-        className="form-add-date-time-picker"
-        disabled={isLoading}
-        value={startAt}
-        onChange={(e: Dayjs|null) => {
-            setStartAt(e);
-          }
-        }
-        ampm={false}
-        sx={{
-          minWidth: "100%",
-          mb: 2,
-          mt: 0,
-        }}
-      />
-      <DateTimePicker
-        className="form-add-date-time-picker"
-        disabled={isLoading}
-        value={completeAt}
-        onChange={(e: Dayjs|null) => {
-            setCompleteAt(e);
-          }
-        }
-        ampm={false}
-        sx={{
-          minWidth: "100%",
-          mb: 2,
-          mt: 0,
-        }}
-      />
-
-      <Autocomplete
-        clearIcon={false}
-        options={[]}
-        freeSolo
-        multiple
-        value={hashTags}
-        onChange={(event: any, newValues: string[] | null) => {
-            if (null === newValues) {
-              newValues = [];
-            }
-            if (newValues) {
-              const hashTag = newValues[newValues.length - 1].trim();
-
-              if (hashTag === '') {
-                newValues.pop();
-                toast.error(`Trying to add empty hash tag.`);
-                return;
-              }
-
-              for (let i = 0; i < newValues.length - 2; i++)
-              {
-                if (newValues[i] === hashTag) {
-                  newValues.pop();
-                  break;
-                }
-              }
-            }
-            if (newValues.length > maxHashes) {
-              newValues = newValues.slice(0,maxHashes);
-              toast.error(`Max ${maxHashes} hash tags allowed.`);
-            }
-            setHashTags(newValues);
-          }
-        }
-        renderTags={(value, props) =>
-          value.map((option, index) => (
-            <Chip variant="tag" color="secondary" label={option} {...props({ index })} />
-          ))
-        }
-        renderInput={(params) => <TextField
-            className="form-add-textfield"
-            label="Add Hash Tags"
-            {...params}
-            onKeyDown={(e: any) => {
-              if (e.key === " " && e.target.value) {
-                const hashTag = e.target.value.toString().trim();
-                if (hashTag === '') {
-                  toast.error(`Trying to add empty hash tag.`);
-                  return;
-                }
-                if (!hashTags.includes(hashTag)) {
-                  if (hashTags.length < maxHashes) {
-                    hashTags.push(hashTag);
-                    setHashTags(hashTags);
-                  } else {
-                    toast.error(`Max ${maxHashes} hash tags allowed.`);
-                  }
-                  e.target.value = null;
-                } else {
-                  e.target.value = hashTag;
-                }
-              }
-            }}
-          />
-        }
-        sx={{
-          mb: 2,
-          mt: 0,
-        }}
-      />
-
-      <FormControl
-        fullWidth
-        sx={{
-          mb: 2,
-          mt: 0,
-        }}
-      >
-        <InputLabel id={`${formId}-select-list-label`}>List</InputLabel>
-        <Select
-          className="form-add-select"
-          labelId={`${formId}-select-list-label`}
-          id={`${formId}-select-list`}
-          label="List"
-          name="list"
-          required
-        >
-          {Object.keys(lists).map((key:string) => (
-            <MenuItem key={key} value={key}>{lists[key]}</MenuItem>
-          ))}
-        </Select>
-      </FormControl>
 
       <FormControl
         fullWidth
@@ -362,4 +223,4 @@ const AchievementAddForm: React.FunctionComponent<AddPostForm> = ({posts, postCh
   )
 }
 
-export default AchievementAddForm;
+export default ListAddForm;

@@ -13,7 +13,7 @@ class AchievementListOwnedRequest {
     limit: number
   ) {
     this._route = apiRoute(
-      'achievementListOwned',
+      'achievementListShared',
       {
         'user': username,
         'offset': offset.toString(),

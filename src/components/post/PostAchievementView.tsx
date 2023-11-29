@@ -24,7 +24,7 @@ const PostAchievementView: React.FunctionComponent<PostAchievementProps> = ({ach
                 className="post-header"
                 subheader={
                     <Box
-                        className="post-achievement-dates"
+                        className="post-subheader"
                         sx={{
                           display: 'flex',
                           flexDirection: 'row',
@@ -34,7 +34,7 @@ const PostAchievementView: React.FunctionComponent<PostAchievementProps> = ({ach
                         }}
                     >
                       <Typography
-                        className="post-achievement-done-at date"
+                        className="date-start-at date"
                         variant="body1"
                         component="div"
                         sx={{
@@ -44,7 +44,7 @@ const PostAchievementView: React.FunctionComponent<PostAchievementProps> = ({ach
                         {achievement.doneAt !== null ? "start: " + achievement.doneAt.toUserView() : "in progress"}
                       </Typography>
                       <Typography
-                          className="post-achievement-done-at date"
+                          className="post-complete-at date"
                           variant="body1"
                           component="div"
                       >
@@ -54,7 +54,7 @@ const PostAchievementView: React.FunctionComponent<PostAchievementProps> = ({ach
                 }
             />
             <CardContent
-                className="post-achievement-card-content"
+                className="post-card-content"
             >
                 <Typography
                     className="post-description"
