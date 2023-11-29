@@ -24,6 +24,7 @@ import StaticInfoBlock from "@/components/StaticInfoBlock";
 import AboutPage from "@/pages/AboutPage";
 import HelpPage from "@/pages/HelpPage";
 import PrivacyAndTermsPage from "@/pages/PrivacyAndTermsPage";
+import {config} from "@/config";
 
 const AppRouter = createBrowserRouter([
     {
@@ -106,21 +107,28 @@ const AppRouter = createBrowserRouter([
                         // throw new Response(e.message, {status:400});
                     }
 
+                    const leftBlocks =  [
+                      <ProfileShortUserView profile={profile}/>,
+                      <ProfileUserListsView profile={profile} lists={profileLists}/>,
+                    ];
+
+                    if (config.features.group.isActive) {
+                      leftBlocks.push(<ProfileUserGroupsView profile={profile} groups={profileGroups}/>);
+                    }
+
+                    const semiBlocks = [
+                      <ProfileUserFollowersView profile={profile} followers={profileFollowers} />,
+                      <ProfileUserFollowedView profile={profile} followed={profileFollowed} />,
+                    ];
+
                     return {
                         profile: profile,
-                        leftBlocks: [
-                          <ProfileShortUserView profile={profile}/>,
-                          <ProfileUserListsView profile={profile} lists={profileLists}/>,
-                          <ProfileUserGroupsView profile={profile} groups={profileGroups}/>,
-                        ],
+                        leftBlocks: leftBlocks,
                         middleBlocks: [],
                         rightBlocks: [
                           <StaticInfoBlock />,
                         ],
-                        semiBlocks: [
-                          <ProfileUserFollowersView profile={profile} followers={profileFollowers} />,
-                          <ProfileUserFollowedView profile={profile} followed={profileFollowed} />,
-                        ],
+                        semiBlocks: semiBlocks,
                     }
                 },
                 Component: AnnLayout,
@@ -135,8 +143,8 @@ const AppRouter = createBrowserRouter([
                                 // throw new Response('Not Found', {status:404});
                             }
 
-                            const limit = 17;
-                            const offset = 0;
+                            const offset = config.api.load.offset;
+                            const limit = config.api.load.limit;
 
                             console.log('ann-user-achievements-collection', params);
                             const apiRequest = new PostsCollectionRequest(params.username, offset, limit);
@@ -169,8 +177,8 @@ const AppRouter = createBrowserRouter([
                                 // throw new Response('Not Found', {status:404});
                             }
 
-                            const offset = 0;
-                            const limit = 11;
+                            const offset = config.api.load.offset;
+                            const limit = config.api.load.limit;
 
                             console.log('ann-user-lists-collection', params);
                             const listOwnedRequest = new AchievementListOwnedRequest(params.username, offset, limit);
