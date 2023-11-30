@@ -7,6 +7,7 @@ import {
 import AchievementAddForm from "@/components/ann/action/AchievementAddForm";
 import UserProfileAvatarLink from "@/components/user/UserProfileAvatarLink";
 import ListAddForm from "@/components/ann/action/ListAddForm";
+import {config} from "@/config";
 
 interface ActionsBlockProps {
   types: string[];
@@ -114,10 +115,10 @@ const ActionsBlock: React.FunctionComponent<ActionsBlockProps> = ({
       >
         <UserProfileAvatarLink profile={profile} cls="user-stripe-avatar"/>
 
-        {creatingState.hasType('achievement') && !creatingState.isCreatingType('achievement') && (
+        {creatingState.hasType(config.features.achievement.title) && !creatingState.isCreatingType(config.features.achievement.title) && (
           <Button
             onClick = {() => {
-                setCreatingState(creatingState.switchCreating('achievement'));
+                setCreatingState(creatingState.switchCreating(config.features.achievement.title));
                 setIsCreating(creatingState.isCreating());
               }
             }
@@ -126,10 +127,10 @@ const ActionsBlock: React.FunctionComponent<ActionsBlockProps> = ({
           </Button>
         )}
 
-        {creatingState.hasType('list') && !creatingState.isCreatingType('list') && (
+        {creatingState.hasType(config.features.list.title) && !creatingState.isCreatingType(config.features.list.title) && (
           <Button
             onClick = {() => {
-                setCreatingState(creatingState.switchCreating('list'));
+                setCreatingState(creatingState.switchCreating(config.features.list.title));
                 setIsCreating(creatingState.isCreating());
               }
             }
@@ -148,13 +149,13 @@ const ActionsBlock: React.FunctionComponent<ActionsBlockProps> = ({
             flexDirection: 'column',
           }}
         >
-          {creatingState.isCreatingType('achievement') && (
+          {creatingState.isCreatingType(config.features.achievement.title) && (
             <AchievementAddForm
               posts={posts}
               postChanger={postChanger}
             />
           )}
-          {creatingState.isCreatingType('list') && (
+          {creatingState.isCreatingType(config.features.list.title) && (
             <ListAddForm
               posts={posts}
               postChanger={postChanger}

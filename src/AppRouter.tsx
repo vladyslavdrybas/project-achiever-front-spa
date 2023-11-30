@@ -220,6 +220,46 @@ const AppRouter = createBrowserRouter([
                         },
                         Component: UserListsPage,
                     },
+                    {
+                        id: "ann-user-list",
+                        path: "lists/:list",
+                        async loader({params}) {
+                            if (!params.username || !params.list) {
+                                toast.error('Not Found');
+                                return {leftBlocks:[]};
+                                // throw new Response('Not Found', {status:404});
+                            }
+
+                            const offset = config.api.load.offset;
+                            const limit = config.api.load.limit;
+                            const lastPostTimestamp = Math.floor((new Date()).getTime()/1000);
+
+                            console.log('ann-user-list', params);
+                            const listOwnedRequest = new AchievementListOwnedRequest(
+                              params.username,
+                              lastPostTimestamp,
+                              offset,
+                              limit,
+                              config.api.load.timerange.older
+                            );
+
+                            let collection = [];
+                            try {
+                                await listOwnedRequest.send();
+                                collection = listOwnedRequest.response;
+                            } catch (e: any) {
+                                toast.error(e.message);
+                                return {leftBlocks:[]};
+                                // throw new Response(e.message, {status:400});
+                            }
+
+                            console.log('ann-user-lists-collection', collection);
+                            return {
+                                posts: collection,
+                            };
+                        },
+                        Component: UserListsPage,
+                    },
                 ],
             },
         ],

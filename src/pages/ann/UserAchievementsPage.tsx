@@ -4,6 +4,7 @@ import {useRouteLoaderData} from "react-router-dom";
 import {TPostsCollection, TProfileResponse} from "@/api/types";
 import PostListCollection from "@/components/post/PostListCollection";
 import ShowMorePostsButton from "@/components/post/ShowMorePostsButton";
+import {config} from "@/config";
 
 const UserAchievementsPage: React.FunctionComponent = () => {
   const { profile } = useRouteLoaderData('ann-user') as { profile: TProfileResponse };
@@ -21,25 +22,27 @@ const UserAchievementsPage: React.FunctionComponent = () => {
   return (
     <>
       <ActionsBlock
-        types={['achievement']}
+        types={[config.features.achievement.title]}
         profile={profile}
         posts={posts}
         postChanger={postChanger}
       />
+
       <ShowMorePostsButton
-        variant={'newer'}
+        variant={config.api.load.timerange.newer}
         username={profile.username}
-        type={'achievement'}
+        target={config.features.achievement.title}
         posts={posts}
         postChanger={postChanger}
       />
+
       {/*<PostMasonryCollection posts={posts} />*/}
       <PostListCollection posts={posts} />
 
       <ShowMorePostsButton
-        variant={'older'}
+        variant={config.api.load.timerange.older}
         username={profile.username}
-        type={'achievement'}
+        target={config.features.achievement.title}
         posts={posts}
         postChanger={postChanger}
       />

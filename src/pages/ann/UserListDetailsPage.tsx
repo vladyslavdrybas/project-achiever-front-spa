@@ -6,9 +6,9 @@ import PostListCollection from "@/components/post/PostListCollection";
 import ShowMorePostsButton from "@/components/post/ShowMorePostsButton";
 import {config} from "@/config";
 
-const UserListsPage: React.FunctionComponent = () => {
+const UserListDetailsPage: React.FunctionComponent = () => {
   const { profile } = useRouteLoaderData('ann-user') as { profile: TProfileResponse };
-  const { posts:loaderPosts } = useRouteLoaderData('ann-user-lists-collection') as { posts: any[]};
+  const { posts:loaderPosts } = useRouteLoaderData('ann-user-list') as { posts: any[]};
 
   const [posts, setPosts] = useState<any[]>(loaderPosts);
   const [stateChangeTrigger, setStateChangeTrigger] = useState<boolean>(false);
@@ -52,4 +52,4 @@ const UserListsPage: React.FunctionComponent = () => {
   )
 }
 
-export default UserListsPage;
+export default UserListDetailsPage;

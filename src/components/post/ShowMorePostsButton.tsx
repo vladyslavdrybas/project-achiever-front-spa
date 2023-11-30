@@ -6,9 +6,9 @@ import {toast} from "react-toastify";
 import PostsCollectionRequest from "@/api/requests/PostsCollectionRequest";
 
 interface ShowMorePostsButtonProp {
-  variant: 'newer' | 'older';
+  variant: string;
   username: string;
-  type: string;
+  target: string;
   posts: any;
   postChanger: any;
 }
@@ -16,14 +16,15 @@ interface ShowMorePostsButtonProp {
 const ShowMorePostsButton: React.FunctionComponent<ShowMorePostsButtonProp> = ({
   variant,
   username,
-  type,
+  target,
   posts,
   postChanger
 }) => {
   const [isNoMoreEntries, setIsNoMoreEntries] = useState<boolean>(false);
 
   const handlePosts = async () => {
-    const timestamp = variant === 'older' ? posts[posts.length - 1].createdAt.getTime() : posts[0].createdAt.getTime();
+    setIsNoMoreEntries(true);
+    const timestamp = variant === config.api.load.timerange.older ? posts[posts.length - 1].createdAt.getTime() : posts[0].createdAt.getTime();
 
     console.log([
       variant,
@@ -33,8 +34,8 @@ const ShowMorePostsButton: React.FunctionComponent<ShowMorePostsButtonProp> = ({
     ]);
 
     let getPostsRequest = null;
-    switch (type) {
-      case 'list':
+    switch (target) {
+      case config.features.list.title:
         getPostsRequest = new AchievementListOwnedRequest(
           username,
           Math.floor(timestamp/1000),
@@ -43,7 +44,7 @@ const ShowMorePostsButton: React.FunctionComponent<ShowMorePostsButtonProp> = ({
           variant
         );
         break;
-      case 'achievement':
+      case config.features.achievement.title:
         getPostsRequest = new PostsCollectionRequest(
           username,
           Math.floor(timestamp/1000),
@@ -53,7 +54,7 @@ const ShowMorePostsButton: React.FunctionComponent<ShowMorePostsButtonProp> = ({
         );
         break;
       default:
-        toast.error('Undefined posts type.');
+        toast.error('Undefined posts target.');
         return;
     }
 
@@ -68,16 +69,25 @@ const ShowMorePostsButton: React.FunctionComponent<ShowMorePostsButtonProp> = ({
 
     if (collection.length > 0) {
       console.log(posts.length);
-      if (variant === 'older') {
+      if (variant === config.api.load.timerange.older) {
         posts = posts.concat(collection);
-      } else if (variant === 'newer') {
+      } else if (variant === config.api.load.timerange.newer) {
         posts = collection.concat(posts);
       }
       console.log(posts.length);
 
       postChanger(posts);
+
+      setIsNoMoreEntries(false);
     } else {
       setIsNoMoreEntries(true);
+
+      if (variant === config.api.load.timerange.newer) {
+        setTimeout(() => {
+          console.log(`show newer button in ${config.api.load.millisecondsToWaitForNextRequest} milliseconds`);
+          setIsNoMoreEntries(false);
+        }, config.api.load.millisecondsToWaitForNextRequest);
+      }
     }
   }
 
@@ -97,7 +107,7 @@ const ShowMorePostsButton: React.FunctionComponent<ShowMorePostsButtonProp> = ({
         className="btn btn-show-more"
         onClick={handlePosts}
       >
-        Show {variant === 'older' ? 'more' : 'new'}
+        {variant === config.api.load.timerange.older ? 'Show more' : 'Check new'}
       </Button>
     </Box>
   )
