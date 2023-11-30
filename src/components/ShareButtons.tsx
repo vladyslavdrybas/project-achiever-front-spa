@@ -6,16 +6,13 @@ import {
 } from "@mui/material";
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TelegramIcon from '@mui/icons-material/Telegram';
-import {generateUrl} from "@/util/PostUtils";
 
-interface PostSharesProps {
-  post: any;
+interface ShareButtonsProps {
+  shareUrl: string;
+  title: string;
 }
 
-const PostShares: React.FunctionComponent<PostSharesProps> = ({post}) => {
-  const shareUrl = generateUrl(post);
-  const title = post.title;
-
+const ShareButtons: React.FunctionComponent<ShareButtonsProps> = ({shareUrl,title}) => {
   return (
     <Box
       className="share-buttons flex-row-start"
@@ -63,4 +60,4 @@ const PostShares: React.FunctionComponent<PostSharesProps> = ({post}) => {
   )
 }
 
-export default PostShares;
+export default ShareButtons;

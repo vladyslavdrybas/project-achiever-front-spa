@@ -9,7 +9,7 @@ const AnnLayout: React.FunctionComponent = () => {
       middleBlocks,
       rightBlocks,
       semiBlocks,
-    } = useRouteLoaderData('ann-user') as {
+    } = useRouteLoaderData('list-root') as {
       leftBlocks: any[],
       middleBlocks: any[],
       rightBlocks: any[],

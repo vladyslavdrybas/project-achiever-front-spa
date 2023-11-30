@@ -15,7 +15,7 @@ class _AchievementListOwnedRequest {
     variant: string,
   ) {
     this._route = apiRoute(
-      'achievementListOwned',
+      'achievementListOwnedCollection',
       {
         'user': username,
         'timestamp': timestamp.toString(),

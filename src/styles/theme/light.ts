@@ -115,7 +115,7 @@ theme = createTheme(theme,{
                         fontFamily: 'greycliff-bold',
                         fontSize: '1rem',
                     },
-                    '&.post-tag, &.date': {
+                    '&.post-tag, &.date, &.subheader': {
                         fontSize: '0.8rem',
                     },
                     '&.static-info-link-text': {

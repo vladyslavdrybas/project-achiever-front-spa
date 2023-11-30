@@ -1,5 +1,3 @@
-import _PostsCollectionRequest from "@/api/requests/_PostsCollectionRequest";
-
 export enum TPageLength {
   five = 5,
   ten = 10,
@@ -13,7 +11,7 @@ export type TPage = {
   length: number;
 }
 
-export type TProfileResponse = {
+export type _TProfileResponse = {
   email: string;
   username: string;
   firstname: string;
@@ -34,6 +32,7 @@ export type TSignInResponse = {
   refreshToken: string;
 }
 
+export type TProfileResponse = any;
 export type TAchievementListViewResponse = any;
 export type TAchievementListCollectionResponse = TAchievementListViewResponse[];
 export type TAchievementViewResponse = any;

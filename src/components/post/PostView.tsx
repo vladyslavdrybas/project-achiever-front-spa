@@ -21,6 +21,7 @@ interface PostViewProps {
 
 const PostView: React.FunctionComponent<PostViewProps> = ({post}) => {
   console.log('PostView', post);
+  const isNew = Math.floor(((new DateW3c()).getTime() - (new DateW3c(post.createdAt)).getTime())/1000) < config.post.periodOfNewInSeconds;
 
   const renderPostContent = (post: TPostViewResponse) => {
       switch (post.type.toLowerCase()) {
@@ -39,7 +40,7 @@ const PostView: React.FunctionComponent<PostViewProps> = ({post}) => {
         return <Link
           className="list-item-link router-link"
           component={RouterLink}
-          to={`/ann/${post.data.owner.username}/${config.features.achievement.title}/${post.data.id}`}
+          to={`/${config.features.achievement.title}/${post.data.id}`}
         >
           <Typography
             className="post-title"
@@ -53,7 +54,7 @@ const PostView: React.FunctionComponent<PostViewProps> = ({post}) => {
         return <Link
           className="list-item-link router-link"
           component={RouterLink}
-          to={`/ann/${post.data.owner.username}/${config.features.list.title}/${post.data.id}`}
+          to={`/${config.features.list.title}/${post.data.id}`}
         >
           <Typography
             className="post-title"
@@ -73,8 +74,6 @@ const PostView: React.FunctionComponent<PostViewProps> = ({post}) => {
         </Typography>;
     }
   }
-
-  const isNew = Math.floor(((new DateW3c()).getTime() - (new DateW3c(post.createdAt)).getTime())/1000) < config.post.periodOfNewInSeconds;
 
   return (
     <Paper

@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import {TAchievementPrerequisites, TPostViewResponse} from "@/api/types";
 import {
     Box,
-    Button,
     Tab,
 } from "@mui/material";
 import {
@@ -14,7 +13,8 @@ import AchievementPrerequisiteTree from "@/components/post/AchievementPrerequisi
 import {getAchievementPrerequisites} from "@/util/AchievementUtils";
 import {toast} from "react-toastify";
 import Loading from "@/components/Loading";
-import PostShares from "@/components/post/PostShares";
+import ShareButtons from "@/components/ShareButtons";
+import {generatePostUrl} from "@/util/UrlGenerator";
 
 interface PostTabsProps {
     post: TPostViewResponse;
@@ -56,7 +56,7 @@ const PostTabs: React.FunctionComponent<PostTabsProps> = ({post}) => {
                     </TabList>
                 </Box>
                 <TabPanel value={`post-share-${post.id}`}>
-                    <PostShares post={post}/>
+                    <ShareButtons shareUrl={generatePostUrl(post)} title={post.title}/>
                 </TabPanel>
                 <TabPanel value={`post-comments-${post.id}`}>
                     Comments

@@ -7,6 +7,7 @@ import {profileFollowed, profileFollowers, profileGroups, profileLists} from "@/
 import {ApiAuthProvider} from "@/security/auth";
 import AppLayout from "@/AppLayout";
 import AnnLayout from "@/layouts/AnnLayout";
+import ListLayout from "@/layouts/ListLayout";
 import HomePage from "@/pages/HomePage";
 import SignInPage from "@/pages/auth/SignInPage";
 import SignUpPage from "@/pages/auth/SignUpPage";
@@ -15,15 +16,19 @@ import HelpPage from "@/pages/HelpPage";
 import PrivacyAndTermsPage from "@/pages/PrivacyAndTermsPage";
 import UserAchievementsPage from "@/pages/ann/UserAchievementsPage";
 import UserListsPage from "@/pages/ann/UserListsPage";
+import ListAchievementsPage from "@/pages/ann/ListAchievementsPage";
 import ProfileShortUserView from "@/components/ann/ProfileShortUserView";
 import ProfileUserListsView from "@/components/ann/ProfileUserListsView";
 import ProfileUserGroupsView from "@/components/ann/ProfileUserGroupsView";
 import ProfileUserFollowersView from "@/components/ann/ProfileUserFollowersView";
 import ProfileUserFollowedView from "@/components/ann/ProfileUserFollowedView";
 import StaticInfoBlock from "@/components/StaticInfoBlock";
+import ListDetailsBlock from "@/components/list/ListDetailsBlock";
 import _AchievementListOwnedRequest from "@/api/requests/_AchievementListOwnedRequest";
 import _PostsCollectionRequest from "@/api/requests/_PostsCollectionRequest";
 import _ProfileRequest from "@/api/requests/_ProfileRequest";
+import _PostsListAchievementsCollectionRequest from "@/api/requests/_PostsListAchievementsCollectionRequest";
+import _ListViewRequest from "@/api/requests/_ListViewRequest";
 
 const AppRouter = createBrowserRouter([
     {
@@ -95,8 +100,15 @@ const AppRouter = createBrowserRouter([
                         // throw new Response('Not Found', {status:404});
                     }
 
-                    const apiRequest = new _ProfileRequest(params.username);
                     let profile = null;
+                    let leftBlocks: any[] = [];
+                    let semiBlocks: any[] = [];
+                    let rightBlocks: any[] = [
+                      <StaticInfoBlock />
+                    ];
+
+                    const apiRequest = new _ProfileRequest(params.username);
+
                     try {
                         await apiRequest.send();
                         profile = apiRequest.response;
@@ -106,7 +118,7 @@ const AppRouter = createBrowserRouter([
                         // throw new Response(e.message, {status:400});
                     }
 
-                    const leftBlocks =  [
+                    leftBlocks =  [
                       <ProfileShortUserView profile={profile}/>,
                       <ProfileUserListsView profile={profile} lists={profileLists}/>,
                     ];
@@ -115,7 +127,7 @@ const AppRouter = createBrowserRouter([
                       leftBlocks.push(<ProfileUserGroupsView profile={profile} groups={profileGroups}/>);
                     }
 
-                    const semiBlocks = [
+                    semiBlocks = [
                       <ProfileUserFollowersView profile={profile} followers={profileFollowers} />,
                       <ProfileUserFollowedView profile={profile} followed={profileFollowed} />,
                     ];
@@ -124,9 +136,7 @@ const AppRouter = createBrowserRouter([
                         profile: profile,
                         leftBlocks: leftBlocks,
                         middleBlocks: [],
-                        rightBlocks: [
-                          <StaticInfoBlock />,
-                        ],
+                        rightBlocks: rightBlocks,
                         semiBlocks: semiBlocks,
                     }
                 },
@@ -209,47 +219,107 @@ const AppRouter = createBrowserRouter([
                             };
                         },
                         Component: UserListsPage,
+                    }
+                ],
+            },
+            {
+                id: "list-root",
+                path: "list/:list",
+                async loader({params}) {
+                    console.log('List loader params', params);
+
+                    let list = null;
+                    let leftBlocks: any[] = [];
+                    let middleBlocks: any[] = [
+                      <StaticInfoBlock />
+                    ];
+                    let semiBlocks: any[] = [];
+                    let rightBlocks: any[] = [];
+
+                    if (!params.list) {
+                        toast.error('Not Found');
+                        return {
+                          profile: null,
+                          leftBlocks: leftBlocks,
+                          middleBlocks: middleBlocks,
+                          rightBlocks: rightBlocks,
+                          semiBlocks: semiBlocks,
+                        };
+                    }
+
+                    const listRequest = new _ListViewRequest(params.list);
+                    try {
+                        await listRequest.send();
+                        list = listRequest.response;
+                    } catch (e: any) {
+                        toast.error(e.message);
+                        return {leftBlocks:[]};
+                        // throw new Response(e.message, {status:400});
+                    }
+
+                    leftBlocks =  [
+                      <ProfileShortUserView profile={list.owner}/>,
+                      <ProfileUserListsView profile={list.owner} lists={profileLists}/>,
+                    ];
+
+                    middleBlocks = [
+                      <ListDetailsBlock list={list} />,
+                    ];
+
+                    rightBlocks = [
+                      <StaticInfoBlock />
+                    ];
+
+                    return {
+                        profile: list.owner,
+                        leftBlocks: leftBlocks,
+                        middleBlocks: middleBlocks,
+                        rightBlocks: rightBlocks,
+                        semiBlocks: semiBlocks,
+                    }
+                },
+                Component: ListLayout,
+                children: [
+                  {
+                    id: "list-concrete",
+                    path: "",
+                    async loader({params}) {
+                      console.log('List Concrete loader params', params);
+                      if (!params.list) {
+                        toast.error('Not Found');
+                        return {posts: []};
+                        // throw new Response('Not Found', {status:404});
+                      }
+
+                      const offset = config.api.load.offset;
+                      const limit = config.api.load.limit;
+                      const lastPostTimestamp = Math.floor((new Date()).getTime()/1000);
+
+                      const listOwnedRequest = new _PostsListAchievementsCollectionRequest(
+                        params.list,
+                        lastPostTimestamp,
+                        offset,
+                        limit,
+                        config.api.load.timerange.older
+                      );
+
+                      let collection = [];
+                      try {
+                        await listOwnedRequest.send();
+                        collection = listOwnedRequest.response;
+                      } catch (e: any) {
+                        toast.error(e.message);
+                        return {posts: []};
+                        // throw new Response(e.message, {status:400});
+                      }
+
+                      console.log('list-concrete posts collection', collection);
+                      return {
+                        posts: collection,
+                      };
                     },
-                    {
-                        id: "ann-user-list",
-                        path: "list/:list",
-                        async loader({params}) {
-                            if (!params.username || !params.list) {
-                                toast.error('Not Found');
-                                return {posts: []};
-                                // throw new Response('Not Found', {status:404});
-                            }
-
-                            const offset = config.api.load.offset;
-                            const limit = config.api.load.limit;
-                            const lastPostTimestamp = Math.floor((new Date()).getTime()/1000);
-
-                            console.log('ann-user-list', params);
-                            const listOwnedRequest = new _AchievementListOwnedRequest(
-                              params.username,
-                              lastPostTimestamp,
-                              offset,
-                              limit,
-                              config.api.load.timerange.older
-                            );
-
-                            let collection = [];
-                            try {
-                                await listOwnedRequest.send();
-                                collection = listOwnedRequest.response;
-                            } catch (e: any) {
-                                toast.error(e.message);
-                                return {posts: []};
-                                // throw new Response(e.message, {status:400});
-                            }
-
-                            console.log('ann-user-list', collection);
-                            return {
-                                posts: collection,
-                            };
-                        },
-                        Component: UserListsPage,
-                    },
+                    Component: ListAchievementsPage,
+                  },
                 ],
             },
         ],
