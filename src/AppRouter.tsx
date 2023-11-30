@@ -222,7 +222,7 @@ const AppRouter = createBrowserRouter([
                     },
                     {
                         id: "ann-user-list",
-                        path: "lists/:list",
+                        path: "list/:list",
                         async loader({params}) {
                             if (!params.username || !params.list) {
                                 toast.error('Not Found');

@@ -75,7 +75,7 @@ const ProfileUserGroupsView: React.FunctionComponent<ProfileUserListsViewProps> 
         <Link
           className="list-item-link router-link"
           component={RouterLink}
-          to={`/group/${l.id}`}
+          to={`/ann/${profile.username}/group/${l.id}`}
           sx={{
             mt: '0.5rem',
             mr: {
