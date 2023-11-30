@@ -2,7 +2,7 @@ import {GetRequest} from "@/api/ApiRequest";
 import apiRoute from "@/api/ApiRouteCollection";
 import {TAchievementPrerequisites} from "@/api/types";
 
-class AchievementPrerequisitesViewRequest {
+class AchievementPrerequisitesTreeRequest {
     _route: string;
     _response: TAchievementPrerequisites|null = null;
 
@@ -31,4 +31,4 @@ class AchievementPrerequisitesViewRequest {
     }
 }
 
-export default AchievementPrerequisitesViewRequest;
+export default AchievementPrerequisitesTreeRequest;

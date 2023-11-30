@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import {Button, Box} from "@mui/material";
-import AchievementListOwnedRequest from "@/api/requests/AchievementListOwnedRequest";
+import _AchievementListOwnedRequest from "@/api/requests/_AchievementListOwnedRequest";
 import {config} from "@/config";
 import {toast} from "react-toastify";
-import PostsCollectionRequest from "@/api/requests/PostsCollectionRequest";
+import _PostsCollectionRequest from "@/api/requests/_PostsCollectionRequest";
 
 interface ShowMorePostsButtonProp {
   variant: string;
@@ -36,7 +36,7 @@ const ShowMorePostsButton: React.FunctionComponent<ShowMorePostsButtonProp> = ({
     let getPostsRequest = null;
     switch (target) {
       case config.features.list.title:
-        getPostsRequest = new AchievementListOwnedRequest(
+        getPostsRequest = new _AchievementListOwnedRequest(
           username,
           Math.floor(timestamp/1000),
           config.api.load.offset,
@@ -45,7 +45,7 @@ const ShowMorePostsButton: React.FunctionComponent<ShowMorePostsButtonProp> = ({
         );
         break;
       case config.features.achievement.title:
-        getPostsRequest = new PostsCollectionRequest(
+        getPostsRequest = new _PostsCollectionRequest(
           username,
           Math.floor(timestamp/1000),
           config.api.load.offset,

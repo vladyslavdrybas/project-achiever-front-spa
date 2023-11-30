@@ -2,7 +2,7 @@ import {GetRequest} from "@/api/ApiRequest";
 import apiRoute from "@/api/ApiRouteCollection";
 import {TProfileResponse} from "@/api/types";
 
-class ProfileRequest {
+class _ProfileRequest {
     _route: string;
     _response: TProfileResponse|null = null;
 
@@ -29,4 +29,4 @@ class ProfileRequest {
     }
 }
 
-export default ProfileRequest;
+export default _ProfileRequest;

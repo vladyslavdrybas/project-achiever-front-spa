@@ -2,7 +2,7 @@ import {ApiRequestError, ApiRequestStatus, PostRequest} from "@/api/ApiRequest";
 import {StorageKeys} from "@/types/StorageKeys";
 import apiRoute from "@/api/ApiRouteCollection";
 
-class SignOutRequest {
+class _SignOutRequest {
     _route: string;
     _response: any = null;
 
@@ -49,4 +49,4 @@ class SignOutRequest {
     }
 }
 
-export default SignOutRequest;
+export default _SignOutRequest;

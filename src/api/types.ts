@@ -1,4 +1,4 @@
-import PostsCollectionRequest from "@/api/requests/PostsCollectionRequest";
+import _PostsCollectionRequest from "@/api/requests/_PostsCollectionRequest";
 
 export enum TPageLength {
   five = 5,

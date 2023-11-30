@@ -3,7 +3,7 @@ import DateW3c from "@/util/DateW3c";
 import {TPostsCollection} from "@/api/types";
 import apiRoute from "@/api/ApiRouteCollection";
 
-class PostsCollectionRequest {
+class _PostsCollectionRequest {
     _route: string;
     _response: TPostsCollection = [];
 
@@ -49,4 +49,4 @@ class PostsCollectionRequest {
     }
 }
 
-export default PostsCollectionRequest;
+export default _PostsCollectionRequest;

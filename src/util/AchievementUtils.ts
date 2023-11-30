@@ -1,7 +1,7 @@
-import AchievementPrerequisitesViewRequest from "@/api/requests/AchievementPrerequisitesTreeRequest";
+import AchievementPrerequisitesTreeRequest from "@/api/requests/_AchievementPrerequisitesTreeRequest";
 
 export const getAchievementPrerequisites = async (achievement:any) => {
-    const request = new AchievementPrerequisitesViewRequest(achievement.id);
+    const request = new AchievementPrerequisitesTreeRequest(achievement.id);
 
     await request.send();
 

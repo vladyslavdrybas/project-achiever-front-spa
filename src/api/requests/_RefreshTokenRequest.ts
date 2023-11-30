@@ -8,7 +8,7 @@ import {StorageKeys} from "@/types/StorageKeys";
 import apiRoute from "@/api/ApiRouteCollection";
 import {TSignInResponse} from "@/api/types";
 
-class RefreshTokenRequest {
+class _RefreshTokenRequest {
     _route: string;
     _response: TSignInResponse|null = null;
 
@@ -72,4 +72,4 @@ class RefreshTokenRequest {
     }
 }
 
-export default RefreshTokenRequest;
+export default _RefreshTokenRequest;

@@ -9,7 +9,8 @@ const _pool: Record<string, string> = {
   accessTokenRefresh: '/auth/token/refresh',
   achievementListOwned: '/achievement/list/[user]/own/[timestamp]/[offset]/[limit]/[variant]',
   achievementListShared: '/achievement/list/[user]/share/[timestamp]/[offset]/[limit]/[variant]',
-  postsCollection: '/post/[user]/[timestamp]/[offset]/[limit]/[variant]',
+  postsCollection: '/post/[user]/[timestamp]/[offset]/[limit]/[variant]' +
+    '',
   userProfile: '/user/[userId]',
   userInfoView: '/user/[userId]/info',
 

@@ -1,7 +1,7 @@
 import {StorageKeys} from "@/types/StorageKeys";
 import {jwt_decode} from "@/util/Jwt";
-import SignInRequest from "@/api/requests/SignInRequest";
-import SignUpRequest from "@/api/requests/SignUpRequest";
+import _SignInRequest from "@/api/requests/_SignInRequest";
+import _SignUpRequest from "@/api/requests/_SignUpRequest";
 
 interface IAuthProvider {
     user: IAuthUser | null;
@@ -64,12 +64,12 @@ export const ApiAuthProvider: IAuthProvider = {
     },
 
     async signUp(email: string, password: string): Promise<void> {
-        const request = new SignUpRequest(email, password);
+        const request = new _SignUpRequest(email, password);
         await request.send();
     },
 
     async signIn(username: string, password: string): Promise<void> {
-        const request = new SignInRequest(username, password);
+        const request = new _SignInRequest(username, password);
 
         await request.send();
 

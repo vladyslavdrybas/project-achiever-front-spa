@@ -1,5 +1,5 @@
 import {StorageKeys} from "@/types/StorageKeys";
-import RefreshTokenRequest from "@/api/requests/RefreshTokenRequest";
+import _RefreshTokenRequest from "@/api/requests/_RefreshTokenRequest";
 import {jwt_decode} from "@/util/Jwt";
 
 enum ApiRequestMethods {
@@ -179,7 +179,7 @@ class ApiRequest {
         const jwt = jwt_decode(accessToken);
 
         if (null === jwt) {
-            const request = new RefreshTokenRequest();
+            const request = new _RefreshTokenRequest();
             await request.send();
         }
     }

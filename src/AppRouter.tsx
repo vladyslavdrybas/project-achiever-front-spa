@@ -1,30 +1,29 @@
+import React from "react";
 import {createBrowserRouter, Navigate, redirect} from "react-router-dom";
 import RootErrorBoundary from "@/RootErrorBoundary";
-import React from "react";
+import {toast} from "react-toastify";
+import {config} from "@/config";
+import {profileFollowed, profileFollowers, profileGroups, profileLists} from "@/artifacts/faked";
 import {ApiAuthProvider} from "@/security/auth";
 import AppLayout from "@/AppLayout";
+import AnnLayout from "@/layouts/AnnLayout";
 import HomePage from "@/pages/HomePage";
 import SignInPage from "@/pages/auth/SignInPage";
 import SignUpPage from "@/pages/auth/SignUpPage";
-import AnnLayout from "@/layouts/AnnLayout";
-import ProfileShortUserView from "@/components/ann/ProfileShortUserView";
-import ProfileRequest from "@/api/requests/ProfileRequest";
-import {toast} from "react-toastify";
-import PostsCollectionRequest from "@/api/requests/PostsCollectionRequest";
-import ProfileUserListsView from "@/components/ann/ProfileUserListsView";
-import {profileFollowed, profileFollowers, profileGroups, profileLists} from "@/artifacts/faked";
-import ProfileUserGroupsView from "@/components/ann/ProfileUserGroupsView";
-import ProfileUserFollowersView from "@/components/ann/ProfileUserFollowersView";
-import ProfileUserFollowedView from "@/components/ann/ProfileUserFollowedView";
-import UserAchievementsPage from "@/pages/ann/UserAchievementsPage";
-import AchievementListOwnedRequest from "@/api/requests/AchievementListOwnedRequest";
-import AchievementListSharedRequest from "@/api/requests/AchievementListSharedRequest";
-import UserListsPage from "@/pages/ann/UserListsPage";
-import StaticInfoBlock from "@/components/StaticInfoBlock";
 import AboutPage from "@/pages/AboutPage";
 import HelpPage from "@/pages/HelpPage";
 import PrivacyAndTermsPage from "@/pages/PrivacyAndTermsPage";
-import {config} from "@/config";
+import UserAchievementsPage from "@/pages/ann/UserAchievementsPage";
+import UserListsPage from "@/pages/ann/UserListsPage";
+import ProfileShortUserView from "@/components/ann/ProfileShortUserView";
+import ProfileUserListsView from "@/components/ann/ProfileUserListsView";
+import ProfileUserGroupsView from "@/components/ann/ProfileUserGroupsView";
+import ProfileUserFollowersView from "@/components/ann/ProfileUserFollowersView";
+import ProfileUserFollowedView from "@/components/ann/ProfileUserFollowedView";
+import StaticInfoBlock from "@/components/StaticInfoBlock";
+import _AchievementListOwnedRequest from "@/api/requests/_AchievementListOwnedRequest";
+import _PostsCollectionRequest from "@/api/requests/_PostsCollectionRequest";
+import _ProfileRequest from "@/api/requests/_ProfileRequest";
 
 const AppRouter = createBrowserRouter([
     {
@@ -96,7 +95,7 @@ const AppRouter = createBrowserRouter([
                         // throw new Response('Not Found', {status:404});
                     }
 
-                    const apiRequest = new ProfileRequest(params.username);
+                    const apiRequest = new _ProfileRequest(params.username);
                     let profile = null;
                     try {
                         await apiRequest.send();
@@ -148,7 +147,7 @@ const AppRouter = createBrowserRouter([
                             const lastPostTimestamp = Math.floor((new Date()).getTime()/1000);
 
                             console.log('ann-user-achievements-collection', params);
-                            const apiRequest = new PostsCollectionRequest(
+                            const apiRequest = new _PostsCollectionRequest(
                               params.username,
                               lastPostTimestamp,
                               offset,
@@ -178,7 +177,7 @@ const AppRouter = createBrowserRouter([
                         async loader({params}) {
                             if (!params.username) {
                                 toast.error('Not Found');
-                                return {leftBlocks:[]};
+                                return {posts: []};
                                 // throw new Response('Not Found', {status:404});
                             }
 
@@ -187,30 +186,21 @@ const AppRouter = createBrowserRouter([
                             const lastPostTimestamp = Math.floor((new Date()).getTime()/1000);
 
                             console.log('ann-user-lists-collection', params);
-                            const listOwnedRequest = new AchievementListOwnedRequest(
+                            const listOwnedRequest = new _AchievementListOwnedRequest(
                               params.username,
                               lastPostTimestamp,
                               offset,
                               limit,
                               config.api.load.timerange.older
                             );
-                            // const listSharedRequest = new AchievementListSharedRequest(
-                            //   params.username,
-                            //   lastPostTimestamp,
-                            //   offset,
-                            //   limit
-                            // );
 
                             let collection = [];
                             try {
                                 await listOwnedRequest.send();
-                                // await listSharedRequest.send();
                                 collection = listOwnedRequest.response;
-                                // collection = collection.concat(listSharedRequest.response);
                             } catch (e: any) {
                                 toast.error(e.message);
-                                return {leftBlocks:[]};
-                                // throw new Response(e.message, {status:400});
+                                return {posts: []};
                             }
 
                             console.log('ann-user-lists-collection', collection);
@@ -226,7 +216,7 @@ const AppRouter = createBrowserRouter([
                         async loader({params}) {
                             if (!params.username || !params.list) {
                                 toast.error('Not Found');
-                                return {leftBlocks:[]};
+                                return {posts: []};
                                 // throw new Response('Not Found', {status:404});
                             }
 
@@ -235,7 +225,7 @@ const AppRouter = createBrowserRouter([
                             const lastPostTimestamp = Math.floor((new Date()).getTime()/1000);
 
                             console.log('ann-user-list', params);
-                            const listOwnedRequest = new AchievementListOwnedRequest(
+                            const listOwnedRequest = new _AchievementListOwnedRequest(
                               params.username,
                               lastPostTimestamp,
                               offset,
@@ -249,11 +239,11 @@ const AppRouter = createBrowserRouter([
                                 collection = listOwnedRequest.response;
                             } catch (e: any) {
                                 toast.error(e.message);
-                                return {leftBlocks:[]};
+                                return {posts: []};
                                 // throw new Response(e.message, {status:400});
                             }
 
-                            console.log('ann-user-lists-collection', collection);
+                            console.log('ann-user-list', collection);
                             return {
                                 posts: collection,
                             };

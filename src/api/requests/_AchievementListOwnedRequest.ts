@@ -3,7 +3,7 @@ import DateW3c from "@/util/DateW3c";
 import {TAchievementListCollectionResponse} from "@/api/types";
 import apiRoute from "@/api/ApiRouteCollection";
 
-class AchievementListOwnedRequest {
+class _AchievementListOwnedRequest {
   _route: string;
   _response: TAchievementListCollectionResponse = [];
 
@@ -47,4 +47,4 @@ class AchievementListOwnedRequest {
   }
 }
 
-export default AchievementListOwnedRequest;
+export default _AchievementListOwnedRequest;

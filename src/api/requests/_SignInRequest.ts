@@ -1,19 +1,20 @@
-import {PostRequest} from "@/api/ApiRequest";
+import {AccessTokenWriter, PostRequest} from "@/api/ApiRequest";
 import apiRoute from "@/api/ApiRouteCollection";
+import {TSignInResponse} from "@/api/types";
 
-class SignUpRequest {
+class _SignInRequest {
     _email: string;
     _password: string;
     _route: string;
-    _response: any = null;
+    _response: TSignInResponse|null = null;
 
     constructor(email: string, password: string) {
-      this._route = apiRoute('register');
+      this._route = apiRoute('login');
       this._email = email;
       this._password = password;
     }
 
-    get response(): any
+    get response(): TSignInResponse|null
     {
         return this._response;
     }
@@ -27,12 +28,16 @@ class SignUpRequest {
             })
         );
 
+        (new AccessTokenWriter()).decorate(request);
+
         await request.send();
+        request.accessToken();
 
         this._response = {
-            message: request.response.message,
+            accessToken: request.response.token,
+            refreshToken: request.response.refresh_token,
         };
     }
 }
 
-export default SignUpRequest;
+export default _SignInRequest;
