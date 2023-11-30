@@ -5,6 +5,7 @@ import {
 } from "@mui/material";
 import {Link as RouterLink} from "react-router-dom";
 import {TProfileResponse} from "@/api/types";
+import {config} from "@/config";
 
 interface ProfileUserListsViewProps {
   profile: TProfileResponse|null;
@@ -75,7 +76,7 @@ const ProfileUserListsView: React.FunctionComponent<ProfileUserListsViewProps> =
         <Link
           className="list-item-link router-link"
           component={RouterLink}
-          to={`/ann/${profile.username}/list/${l.id}`}
+          to={`/ann/${profile.username}/${config.features.list.title}/${l.id}`}
           sx={{
             mt: '0.5rem',
             mr: {
