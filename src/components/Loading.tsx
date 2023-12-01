@@ -46,7 +46,7 @@ const Loading: React.FunctionComponent<LoadingProps> = ({size = 34}) => {
           zIndex: 100,
           display: 'block',
           p: size/100 < 0.5 ? '4px' : size/100,
-          bgcolor: 'secondary.background',
+          // bgcolor: 'secondary.background',
           // boxShadow: `rgba(0, 0, 0, 0.2) 0px 0px 0px 1px;`,
           borderRadius: '4px',
           minWidth: size,
