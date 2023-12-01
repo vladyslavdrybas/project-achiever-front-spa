@@ -1,6 +1,5 @@
 import React from "react";
 import {
-    Avatar,
     Box,
     Container,
     Typography,
@@ -67,21 +66,14 @@ const CoverScreen: React.FunctionComponent = () => {
             </Typography>
 
             <Box
-                sx={{
-                    mt: 4,
-                }}
-            >
-                {/*<Avatar*/}
-                {/*    className="avatar-drop-shadow"*/}
-                {/*    src="/logo.svg"*/}
-                {/*    alt="Achiever Notifier Network"*/}
-                {/*    sx={{*/}
-                {/*        width: 233,*/}
-                {/*        height: 233,*/}
-                {/*    }}*/}
-                {/*/>*/}
-              <Logo size={233} />
-            </Box>
+              component={Logo}
+              size={233}
+              sx={{
+                filter: `drop-shadow(13px 21px 13px #162850)`,
+                background: 'none',
+                mt: 4,
+              }}
+            />
         </Container>
     );
 }

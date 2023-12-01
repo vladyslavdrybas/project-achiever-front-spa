@@ -1,5 +1,6 @@
 import React from "react";
-import {Box} from "@mui/material";
+import {Box, SvgIcon} from "@mui/material";
+import {ReactComponent as LogoIcon} from "@/artifacts/asset/img/ANN_V1_crop.svg";
 
 interface LogoProps {
   size?: number,
@@ -21,13 +22,20 @@ const Logo: React.FunctionComponent<LogoProps> = ({size = 34}) => {
         borderRadius: '4px',
       }}
     >
-      <Box
-        component="img"
+      {/*<Box*/}
+      {/*  component="img"*/}
+      {/*  sx={{*/}
+      {/*    width: size,*/}
+      {/*    height: size,*/}
+      {/*  }}*/}
+      {/*  src={'/ANN_V1_crop.png'}*/}
+      {/*/>*/}
+      <SvgIcon
         sx={{
-          width: size,
-          height: size,
+          fontSize: size,
         }}
-        src={'/asset/img/ANN_V1_crop.png'}
+        component={LogoIcon}
+        inheritViewBox={true}
       />
     </Box>
   )
