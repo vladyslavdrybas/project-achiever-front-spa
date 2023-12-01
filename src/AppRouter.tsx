@@ -29,6 +29,7 @@ import _PostsCollectionRequest from "@/api/requests/_PostsCollectionRequest";
 import _ProfileRequest from "@/api/requests/_ProfileRequest";
 import _PostsListAchievementsCollectionRequest from "@/api/requests/_PostsListAchievementsCollectionRequest";
 import _ListViewRequest from "@/api/requests/_ListViewRequest";
+import Loading from "@/components/Loading";
 
 const AppRouter = createBrowserRouter([
     {
@@ -49,6 +50,10 @@ const AppRouter = createBrowserRouter([
             {
                 path: "*",
                 element: <Navigate to={"/"} />,
+            },
+            {
+              path: "/loader",
+              element: <Loading size={233} />,
             },
             {
                 index: true,

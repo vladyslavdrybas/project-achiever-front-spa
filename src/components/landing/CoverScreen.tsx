@@ -5,6 +5,7 @@ import {
     Container,
     Typography,
 } from "@mui/material";
+import Logo from "@/components/Logo";
 
 const CoverScreen: React.FunctionComponent = () => {
     return (
@@ -70,15 +71,16 @@ const CoverScreen: React.FunctionComponent = () => {
                     mt: 4,
                 }}
             >
-                <Avatar
-                    className="avatar-drop-shadow"
-                    src="/logo.svg"
-                    alt="Achiever Notifier Network"
-                    sx={{
-                        width: 233,
-                        height: 233,
-                    }}
-                />
+                {/*<Avatar*/}
+                {/*    className="avatar-drop-shadow"*/}
+                {/*    src="/logo.svg"*/}
+                {/*    alt="Achiever Notifier Network"*/}
+                {/*    sx={{*/}
+                {/*        width: 233,*/}
+                {/*        height: 233,*/}
+                {/*    }}*/}
+                {/*/>*/}
+              <Logo size={233} />
             </Box>
         </Container>
     );

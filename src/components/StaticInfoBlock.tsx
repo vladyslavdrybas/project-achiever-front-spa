@@ -6,6 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import {Link as RouterLink} from "react-router-dom";
+import Logo from "@/components/Logo";
 
 const links: any[] = [
   {
@@ -75,16 +76,17 @@ const StaticInfoBlock: React.FunctionComponent = () => {
           mt: 0.8,
         }}
       >
-        <Avatar
-          alt="logo"
-          src="/logo.svg"
-          sx={{
-            width: "21px",
-            height: "21px",
-            mr: 0.55,
-          }}
-        />
-        <Typography className="static-info-link-text" variant="body1" component="span">Achiever Notifier Network © { (new Date()).getFullYear()}</Typography>
+        {/*<Avatar*/}
+        {/*  alt="logo"*/}
+        {/*  src="/logo.svg"*/}
+        {/*  sx={{*/}
+        {/*    width: "21px",*/}
+        {/*    height: "21px",*/}
+        {/*    mr: 0.55,*/}
+        {/*  }}*/}
+        {/*/>*/}
+        <Logo size={21} />
+        <Typography className="static-info-link-text" variant="body1" component="span" sx={{ml:0.55}}>Achiever Notifier Network © { (new Date()).getFullYear()}</Typography>
       </Box>
     </Box>
   )

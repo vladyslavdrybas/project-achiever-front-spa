@@ -248,7 +248,7 @@ theme = createTheme(theme,{
             styleOverrides: {
                 root: {
                     fontFamily: 'greycliff-demibold',
-                    paddingBottom: 8,
+                    paddingBottom: 0,
                 }
             }
         },

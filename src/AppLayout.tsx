@@ -9,6 +9,7 @@ import {
 import {Link as ReactLink, Outlet, useNavigation, useRouteLoaderData} from "react-router-dom";
 import {IAuthUser} from "@/security/auth";
 import Loading from "@/components/Loading";
+import Logo from "@/components/Logo";
 
 interface IAppLayout {
     outlet?: React.JSX.Element;
@@ -64,20 +65,22 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({outlet}) => {
           <ReactLink
             to="/"
           >
-            <Avatar
-              alt="logo"
-              src="/logo.svg"
-              sx={{
-                width: "34px",
-                height: "34px",
-                mr: 2,
-              }}
-            />
+            {/*<Avatar*/}
+            {/*  alt="logo"*/}
+            {/*  src="/logo.svg"*/}
+            {/*  sx={{*/}
+            {/*    width: "34px",*/}
+            {/*    height: "34px",*/}
+            {/*    mr: 2,*/}
+            {/*  }}*/}
+            {/*/>*/}
+            <Logo size={34} />
           </ReactLink>
           <Typography
             variant="body1"
             component="div"
             sx={{
+              ml: 2,
               textAlign: "center",
             }}
           >

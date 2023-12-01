@@ -4,7 +4,6 @@ import {
     Box,
     Toolbar,
     Button,
-    IconButton,
     Container,
     Avatar,
     Tooltip,
@@ -14,8 +13,8 @@ import {
 import SignInIcon from '@mui/icons-material/Login'
 import {IAuthUser} from "@/security/auth";
 import {Link as ReactLink, useNavigate} from "react-router-dom";
-import colorFromUsername from "@/util/ColorFromUsername";
 import UserProfileAvatar from "@/components/user/UserProfileAvatar";
+import Logo from "@/components/Logo";
 
 const pages: any[] = [
     {
@@ -70,11 +69,12 @@ const HeaderNavigation: React.FunctionComponent<NavigationProps> = ({user}) => {
                         <ReactLink
                             to="/"
                         >
-                            <Avatar
-                                className="avatar-navigation-logo"
-                                alt="logo"
-                                src="/logo.svg"
-                            />
+                            {/*<Avatar*/}
+                            {/*    className="avatar-navigation-logo"*/}
+                            {/*    alt="logo"*/}
+                            {/*    src="/logo.svg"*/}
+                            {/*/>*/}
+                          <Logo size={34} />
                         </ReactLink>
                     </Box>
 
